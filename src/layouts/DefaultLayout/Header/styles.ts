@@ -12,6 +12,7 @@ export const HeaderContainer = styled.header`
     width: 3.2rem;
     margin-right: 0.5rem;
   }
+
   nav {
     display: flex;
 
@@ -20,8 +21,9 @@ export const HeaderContainer = styled.header`
       justify-content: center;
       align-items: center;
 
-      width: 4rem;
+      width: auto;
       height: 3rem;
+      padding: 0 0.4rem;
 
       color: black;
       text-decoration: none;
@@ -30,7 +32,7 @@ export const HeaderContainer = styled.header`
       border-bottom: 3px solid transparent;
 
       :hover {
-        border-bottom: 3px solid blue;
+        border-bottom: 2px solid blueviolet;
       }
 
       &.active {

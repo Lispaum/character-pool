@@ -10,6 +10,7 @@ export function Header() {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/sheets">Sheets</NavLink>
+        <NavLink to="/new-sheet">New Sheet</NavLink>
       </nav>
     </HeaderContainer>
   )

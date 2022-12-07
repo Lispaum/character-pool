@@ -17,7 +17,14 @@ export const FieldContainer = styled.div`
 export const TableContainer = styled.div`
   border: 1px solid black;
   margin: 0.25rem;
+
+  h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
+  }
+
   span {
-    padding: 0.2rem;
+    margin: 0.2rem 0.5rem;
   }
 `

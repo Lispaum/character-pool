@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 
-interface SkillFieldContainerProps {
-  textColor?: 'black' | 'white'
-  backgroundColor?: 'blue' | 'cyan'
-}
-
-export const SkillFieldContainer = styled.div<SkillFieldContainerProps>`
+export const FieldContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -16,5 +11,20 @@ export const SkillFieldContainer = styled.div<SkillFieldContainerProps>`
 
   :nth-child(odd) {
     background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
+  }
+`
+
+export const TableContainer = styled.div`
+  border: 1px solid black;
+  margin: 0.25rem;
+
+  h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
+  }
+
+  span {
+    margin: 0.2rem 0.5rem;
   }
 `

@@ -7,7 +7,7 @@ import {
 } from './styles'
 import { Table } from '../../components/Table'
 
-export function Sheets() {
+export function NewSheet() {
   const primaryAttributesTableData = {
     title: '',
     data: [

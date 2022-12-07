@@ -9,13 +9,13 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-    /* background-color: ${(props) => props.theme['cyan-100']}; */
+    background-color: whitesmoke;//ivory, lightgrey
     /* color: #fff; */
 }
 
 :focus{
-    outline: 0;
-    box-shadow: 0 0 0 2px ;
+    outline: transparent;
+    box-shadow: 0 0 0 2px transparent;
 }
 
 `
