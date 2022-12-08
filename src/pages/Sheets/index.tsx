@@ -80,7 +80,7 @@ export function Sheets() {
     <SheetContainer>
       <form action=" ">
         <SheetHeaderContainer>
-          <div>Your Character Name</div>
+          <div>Geralt of Rivia</div>
         </SheetHeaderContainer>
         <SheetBodyContainer>
           <Table tableData={primaryAttributesTableData} />

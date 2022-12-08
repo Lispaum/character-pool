@@ -6,18 +6,28 @@ interface FieldProps {
 }
 
 interface TableProps {
-  tableData: { title: string; data: FieldProps[] }
+  tableData: { title: string; data: FieldProps[]; hasValues: boolean }
 }
 
-export function Table({ tableData }: TableProps) {
+export function InputTable({ tableData }: TableProps) {
   return (
     <TableContainer>
       <h1>{tableData.title}</h1>
+
       {tableData.data.map((field: FieldProps) => {
         return (
           <FieldContainer key={field.fieldKey}>
-            <span>{field.fieldKey}</span>
-            {field.fieldValue && <span>{field.fieldValue}</span>}
+            <label>{field.fieldKey}</label>
+            {tableData.hasValues ? (
+              <input
+                type="number"
+                id={field.fieldKey}
+                placeholder="-"
+                value={field.fieldValue}
+              />
+            ) : (
+              ''
+            )}
           </FieldContainer>
         )
       })}

@@ -12,9 +12,12 @@ export const SheetHeaderContainer = styled.div`
   justify-content: center;
   margin: 0.4rem 0;
 
-  div {
+  input {
+    border: none;
     border-bottom: 2px solid darkblue;
 
+    width: auto;
+    background-color: transparent;
     font-size: 2rem;
     font-weight: bold;
     color: darkblue;
