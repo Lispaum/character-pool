@@ -14,7 +14,6 @@ export const TableContainer = styled.div`
 export const FieldContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
   font-family: Georgia, 'Times New Roman', Times, serif;
 
   color: ${(props) => props.theme['white-100'] ?? 'black'};
@@ -27,9 +26,11 @@ export const FieldContainer = styled.div`
   label {
     margin: 0.2rem 0.5rem;
   }
+
   input {
-    width: 2rem;
+    width: 3rem;
     border: none;
+
     font-size: inherit;
     font-family: inherit;
     background-color: transparent;
@@ -41,5 +42,8 @@ export const FieldContainer = styled.div`
 
   input[type='number']:focus {
     -moz-appearance: unset;
+  }
+  input[type='number']:disabled {
+    color: black;
   }
 `
