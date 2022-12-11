@@ -14,11 +14,8 @@ import {
   magicTableData,
   background,
 } from '../../contexts/tests/testData'
-interface NewSheetProps {
-  isReadOnly: boolean
-}
 
-export function NewSheet(props: NewSheetProps) {
+export function NewSheet() {
   const [charName, setCharName] = useState('Your Char Name')
 
   return (
