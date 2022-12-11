@@ -6,7 +6,7 @@ import logoLipaum from '../../../assets/logo-lipao.png'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={logoLipaum} alt="logo-lipaum" />
+      <img src={logoLipaum} alt="logo-lipaum"></img>
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/sheets">Sheets</NavLink>

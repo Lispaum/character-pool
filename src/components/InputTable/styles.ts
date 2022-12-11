@@ -34,4 +34,12 @@ export const FieldContainer = styled.div`
     font-family: inherit;
     background-color: transparent;
   }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  input[type='number']:focus {
+    -moz-appearance: unset;
+  }
 `

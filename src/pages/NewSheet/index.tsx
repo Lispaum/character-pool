@@ -17,7 +17,7 @@ export function NewSheet(props: NewSheetProps) {
     title: '',
     hasValues: true,
 
-    data: [
+    fields: [
       { fieldKey: 'INT', fieldValue: 6 },
       { fieldKey: 'REF', fieldValue: 14 },
       { fieldKey: 'DEX', fieldValue: 10 },
@@ -33,7 +33,7 @@ export function NewSheet(props: NewSheetProps) {
     title: '',
     hasValues: true,
 
-    data: [
+    fields: [
       { fieldKey: 'STUN', fieldValue: 8 },
       { fieldKey: 'RUN', fieldValue: 27 },
       { fieldKey: 'STA', fieldValue: 5 },
@@ -48,7 +48,7 @@ export function NewSheet(props: NewSheetProps) {
     title: 'Skills',
     hasValues: true,
 
-    data: [
+    fields: [
       { fieldKey: 'Awareness', fieldValue: 9 },
       { fieldKey: 'Riding', fieldValue: 4 },
       { fieldKey: 'Spell Casting', fieldValue: 8 },
@@ -74,7 +74,7 @@ export function NewSheet(props: NewSheetProps) {
   const magicTableData = {
     title: 'Magic',
     hasValues: false,
-    data: [
+    fields: [
       { fieldKey: 'Yrden Sign', fieldValue: undefined },
       { fieldKey: 'Quen Sign', fieldValue: undefined },
       { fieldKey: 'Aard Sign', fieldValue: undefined },
@@ -102,13 +102,13 @@ export function NewSheet(props: NewSheetProps) {
             />
           </SheetHeaderContainer>
           <SheetBodyContainer>
-            <InputTable tableData={primaryAttributesTableData} />
-            <InputTable tableData={secondaryAttributesTableData} />
+            <InputTable {...primaryAttributesTableData} />
+            <InputTable {...secondaryAttributesTableData} />
 
             <img src={characterImage} alt="" />
 
-            <InputTable tableData={skillsTableData} />
-            <InputTable tableData={magicTableData} />
+            <InputTable {...skillsTableData} />
+            <InputTable {...magicTableData} />
 
             <TextBoxContainer>
               <p>

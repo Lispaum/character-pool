@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { FieldContainer, TableContainer } from './styles'
 
 interface FieldProps {
@@ -6,27 +7,47 @@ interface FieldProps {
 }
 
 interface TableProps {
-  tableData: { title: string; data: FieldProps[]; hasValues: boolean }
+  title: string
+  fields: FieldProps[]
+  hasValues: boolean
 }
 
-export function InputTable({ tableData }: TableProps) {
+export function InputTable({ title, fields, hasValues }: TableProps) {
+  const [tableFields, setTableFields] = useState(fields)
+
+  function handleFieldValueChange(event: any) {
+    let newTableFields = tableFields
+
+    newTableFields = newTableFields.map((field) => {
+      if (field.fieldKey === event.target.name) {
+        return { ...field, fieldValue: Number(event.target.value) }
+      }
+
+      return field
+    })
+
+    setTableFields(newTableFields)
+  }
+
   return (
     <TableContainer>
-      <h1>{tableData.title}</h1>
+      <h1>{title}</h1>
 
-      {tableData.data.map((field: FieldProps) => {
+      {tableFields.map((field: FieldProps) => {
         return (
           <FieldContainer key={field.fieldKey}>
-            <label>{field.fieldKey}</label>
-            {tableData.hasValues ? (
+            <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
+            {hasValues && (
               <input
                 type="number"
                 id={field.fieldKey}
+                name={field.fieldKey}
                 placeholder="-"
+                min={1}
+                max={20}
                 value={field.fieldValue}
+                onChange={handleFieldValueChange}
               />
-            ) : (
-              ''
             )}
           </FieldContainer>
         )
