@@ -5,14 +5,15 @@ import {
   SheetHeaderContainer,
   TextBoxContainer,
 } from './styles'
-import { Table } from '../../components/Table'
+import { KeyValueTable } from '../../components/Tables/KeyValueTable'
 import {
-  primaryAttributesTableData,
-  secondaryAttributesTableData,
-  skillsTableData,
-  magicTableData,
+  primaryAttributesTable,
+  secondaryAttributesTable,
+  skillsTable,
+  magicTable,
   background,
 } from '../../contexts/tests/testData'
+import { ListTable } from '../../components/Tables/ListTable'
 
 export function Sheets() {
   return (
@@ -23,12 +24,12 @@ export function Sheets() {
             <div>Geralt of Rivia</div>
           </SheetHeaderContainer>
           <SheetBodyContainer>
-            <Table {...primaryAttributesTableData} />
-            <Table {...secondaryAttributesTableData} />
+            <KeyValueTable {...primaryAttributesTable} />
+            <KeyValueTable {...secondaryAttributesTable} />
 
             <img src={characterImage} alt="" />
-            <Table {...skillsTableData} />
-            <Table {...magicTableData} />
+            <KeyValueTable {...skillsTable} />
+            <ListTable {...magicTable} />
             <TextBoxContainer>
               <p>{background}</p>
               <div>–Rodolf Kazmer</div>

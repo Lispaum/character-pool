@@ -1,23 +1,21 @@
 import { useState } from 'react'
-import { FieldContainer, TableContainer } from './styles'
+import { FieldContainer, TableContainer } from '../styles'
 
 interface FieldProps {
   fieldKey: string
-  fieldValue?: number
+  fieldValue: number
 }
 
 interface TableProps {
   title: string
   fields: FieldProps[]
-  hasValues: boolean
-  minValue?: number
-  maxValue?: number
+  minValue: number
+  maxValue: number
 }
 
-export function Table({
+export function KeyValueTable({
   title,
   fields,
-  hasValues,
   minValue,
   maxValue,
 }: TableProps) {
@@ -45,18 +43,16 @@ export function Table({
         return (
           <FieldContainer key={field.fieldKey}>
             <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
-            {hasValues && (
-              <input
-                type="number"
-                id={field.fieldKey}
-                name={field.fieldKey}
-                placeholder="-"
-                min={minValue}
-                max={maxValue}
-                value={field.fieldValue}
-                onChange={handleFieldValueChange}
-              />
-            )}
+            <input
+              type="number"
+              id={field.fieldKey}
+              name={field.fieldKey}
+              placeholder="-"
+              min={minValue}
+              max={maxValue}
+              value={field.fieldValue}
+              onChange={handleFieldValueChange}
+            />
           </FieldContainer>
         )
       })}

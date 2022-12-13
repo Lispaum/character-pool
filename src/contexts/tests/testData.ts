@@ -1,6 +1,5 @@
-export const primaryAttributesTableData = {
+export const primaryAttributesTable = {
   title: '',
-  hasValues: true,
   minValue: 1,
   maxValue: 20,
   fields: [
@@ -15,9 +14,8 @@ export const primaryAttributesTableData = {
   ],
 }
 
-export const secondaryAttributesTableData = {
+export const secondaryAttributesTable = {
   title: '',
-  hasValues: true,
   minValue: 1,
   maxValue: 100,
   fields: [
@@ -31,9 +29,8 @@ export const secondaryAttributesTableData = {
   ],
 }
 
-export const skillsTableData = {
+export const skillsTable = {
   title: 'Skills',
-  hasValues: true,
   minValue: 1,
   maxValue: 100,
   fields: [
@@ -48,9 +45,7 @@ export const skillsTableData = {
     { fieldKey: 'Athletics', fieldValue: 10 },
     { fieldKey: 'Small Blades', fieldValue: 9 },
     { fieldKey: 'Melee', fieldValue: 7 },
-    { fieldKey: 'Deduction', fieldValue: 8 },
-    { fieldKey: 'Crossbow', fieldValue: 6 },
-    { fieldKey: 'Stealth', fieldValue: 8 },
+
     { fieldKey: 'Intimidation', fieldValue: 9 },
     { fieldKey: 'Physique', fieldValue: 6 },
     { fieldKey: 'Resist Coercion', fieldValue: 8 },
@@ -59,21 +54,40 @@ export const skillsTableData = {
   ],
 }
 
-export const magicTableData = {
-  title: 'Magic',
-  hasValues: false,
+export const trainableSkillsTable = {
+  title: 'Trainable Skills',
+  hasValues: true,
+  minValue: 1,
+  maxValue: 100,
   fields: [
-    { fieldKey: 'Yrden Sign', fieldValue: undefined },
-    { fieldKey: 'Quen Sign', fieldValue: undefined },
-    { fieldKey: 'Aard Sign', fieldValue: undefined },
-    { fieldKey: 'Igni Sign', fieldValue: undefined },
-    { fieldKey: 'Axii Sign', fieldValue: undefined },
-    { fieldKey: 'Magic Trap Sign', fieldValue: undefined },
-    { fieldKey: 'Active Shield Sign', fieldValue: undefined },
-    { fieldKey: 'Aard Sweep Sign', fieldValue: undefined },
-    { fieldKey: 'Fire Stream Sign', fieldValue: undefined },
-    { fieldKey: 'Puppet Sign', fieldValue: undefined },
+    { fieldKey: 'Deduction', fieldValue: 0 },
+    { fieldKey: 'Crossbow', fieldValue: 0 },
+    { fieldKey: 'Stealth', fieldValue: 0 },
   ],
+}
+
+export const magicTable = {
+  title: 'Magic',
+  fields: [
+    'Yrden Sign',
+    'Quen Sign',
+    'Aard Sign',
+    'Igni Sign',
+    'Axii Sign',
+    'Magic Trap Sign',
+    'Active Shield Sign',
+    'Aard Sweep Sign',
+  ],
+}
+
+export const scrolls = {
+  title: 'Scrolls',
+  fields: ['Fire Stream Sign', 'Puppet Sign'],
+}
+export const currentTraining = {
+  title: 'Training',
+  hasValues: true,
+  fields: [{ fieldKey: '-', fieldValue: 0 }],
 }
 
 export const background = ` Geralt of Rivia, Eh? Well there’s a hero if I ever hearda one.
