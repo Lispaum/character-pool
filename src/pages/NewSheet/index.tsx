@@ -16,6 +16,7 @@ import {
   TextBoxContainer,
 } from './styles'
 import { KeyValueTable } from '../../components/Tables/KeyValueTable'
+import { PrimaryAttributesTable } from '../../components/Tables/PrimaryAttributesTable'
 import { createContext, useState } from 'react'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
 import { ListTable } from '../../components/Tables/ListTable'
@@ -74,10 +75,34 @@ export function NewSheet() {
     ),
   )
 
-  // function handleUpdatePrimaryAttributes(attributeName: string, newValue: number){
-  //   let newFields = state.
+  function handleUpdateField(event: any) {
+    const attributeName = event.target.name
+    const newValue = Number(event.target.value)
 
-  // }
+    console.log('event.target para pai', event.target)
+    console.log(
+      'current',
+      primaryAttributesTable,
+      'name: ',
+      attributeName,
+      'value: ',
+      newValue,
+    )
+    const newTable = primaryAttributesTable
+    let newTableFields = newTable.fields
+
+    newTableFields = newTableFields.map((field) => {
+      if (field.fieldKey === attributeName) {
+        return { ...field, fieldValue: newValue }
+      }
+
+      return field
+    })
+
+    newTable.fields = newTableFields
+
+    setPrimaryAttributesTable(newTable)
+  }
 
   return (
     <SheetContext.Provider
@@ -103,7 +128,10 @@ export function NewSheet() {
             </SheetHeaderContainer>
             <SheetBodyContainer>
               <span>{totalAttributesSum}</span>
-              <KeyValueTable {...primaryAttributesTable} />
+              <PrimaryAttributesTable
+                {...primaryAttributesTable}
+                handleUpdateField={handleUpdateField}
+              />
               <KeyValueTable {...secondaryAttributesTable} />
 
               <div className="middleBlock">
