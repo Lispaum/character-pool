@@ -1,5 +1,15 @@
 import characterImage from '../../assets/meditating-geralt.gif'
 import {
+  testPrimaryAttributesTable,
+  testSkillsTable,
+  testMagicTable,
+  testBackground,
+  testSecondaryAttributesTable,
+  testScrollsTable,
+  testTrainableSkillsTable,
+  testCurrentTrainingTable,
+} from '../../contexts/tests/testData'
+import {
   SheetBodyContainer,
   SheetContainer,
   SheetHeaderContainer,
@@ -7,16 +17,6 @@ import {
 } from './styles'
 import { KeyValueTable } from '../../components/Tables/KeyValueTable'
 import { createContext, useState } from 'react'
-import {
-  primaryAttributesTable,
-  skillsTable,
-  magicTable,
-  background,
-  secondaryAttributesTable,
-  scrolls,
-  trainableSkillsTable,
-  currentTraining,
-} from '../../contexts/tests/testData'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
 import { ListTable } from '../../components/Tables/ListTable'
 
@@ -39,29 +39,56 @@ interface ListTableProps {
 interface SheetContextType {
   primaryAttributesTable: KeyValueTableProps
   secondaryAttributesTable: KeyValueTableProps
+  currentTrainingTable: KeyValueTableProps
   skillsTable: KeyValueTableProps
+  trainableSkillsTable: ListTableProps
   magicTable: ListTableProps
-  background: string
+  scrollsTable: ListTableProps
 }
 
-export const SheetContext = createContext({
-  primaryAttributesTable: { ...primaryAttributesTable },
-  secondaryAttributesTable: { ...secondaryAttributesTable },
-  skillsTable: { ...skillsTable },
-  magicTable: { ...magicTable },
-} as SheetContextType)
+export const SheetContext = createContext({} as SheetContextType)
 
 export function NewSheet() {
   const [charName, setCharName] = useState('Your Char Name')
+  const [primaryAttributesTable, setPrimaryAttributesTable] = useState(
+    testPrimaryAttributesTable,
+  )
+  const [secondaryAttributesTable, setSecondaryAttributesTable] = useState(
+    testSecondaryAttributesTable,
+  )
+  const [currentTrainingTable, setCurrentTrainingTable] = useState(
+    testCurrentTrainingTable,
+  )
+  const [skillsTable, setSkillsTable] = useState(testSkillsTable)
+  const [trainableSkillsTable, setTrainableSkillsTable] = useState(
+    testTrainableSkillsTable,
+  )
+  const [magicTable, setMagicTable] = useState(testMagicTable)
+  const [scrollsTable, setScrollsTable] = useState(testScrollsTable)
+  const [background, setBackground] = useState(testBackground)
+
+  const [totalAttributesSum, setTotalAttributesSum] = useState(
+    primaryAttributesTable.fields.reduce(
+      (acc, element) => acc + element.fieldValue,
+      0,
+    ),
+  )
+
+  // function handleUpdatePrimaryAttributes(attributeName: string, newValue: number){
+  //   let newFields = state.
+
+  // }
 
   return (
     <SheetContext.Provider
       value={{
         primaryAttributesTable,
         secondaryAttributesTable,
-        background,
+        currentTrainingTable,
         skillsTable,
+        trainableSkillsTable,
         magicTable,
+        scrollsTable,
       }}
     >
       <SheetContainer>
@@ -75,20 +102,21 @@ export function NewSheet() {
               />
             </SheetHeaderContainer>
             <SheetBodyContainer>
+              <span>{totalAttributesSum}</span>
               <KeyValueTable {...primaryAttributesTable} />
               <KeyValueTable {...secondaryAttributesTable} />
 
               <div className="middleBlock">
                 <img src={characterImage} alt="" />
-                <TrainingTable {...currentTraining} />
+                <TrainingTable {...currentTrainingTable} />
               </div>
               <div className="skillsBlock">
                 <KeyValueTable {...skillsTable} />
-                <KeyValueTable {...trainableSkillsTable} />
+                <ListTable {...trainableSkillsTable} />
               </div>
               <div className="magicBlock">
                 <ListTable {...magicTable} />
-                <ListTable {...scrolls} />
+                <ListTable {...scrollsTable} />
               </div>
 
               <TextBoxContainer>

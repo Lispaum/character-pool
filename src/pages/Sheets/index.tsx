@@ -7,11 +7,11 @@ import {
 } from './styles'
 import { KeyValueTable } from '../../components/Tables/KeyValueTable'
 import {
-  primaryAttributesTable,
-  secondaryAttributesTable,
-  skillsTable,
-  magicTable,
-  background,
+  testPrimaryAttributesTable,
+  testSecondaryAttributesTable,
+  testSkillsTable,
+  testMagicTable,
+  testBackground,
 } from '../../contexts/tests/testData'
 import { ListTable } from '../../components/Tables/ListTable'
 
@@ -24,14 +24,14 @@ export function Sheets() {
             <div>Geralt of Rivia</div>
           </SheetHeaderContainer>
           <SheetBodyContainer>
-            <KeyValueTable {...primaryAttributesTable} />
-            <KeyValueTable {...secondaryAttributesTable} />
+            <KeyValueTable {...testPrimaryAttributesTable} />
+            <KeyValueTable {...testSecondaryAttributesTable} />
 
             <img src={characterImage} alt="" />
-            <KeyValueTable {...skillsTable} />
-            <ListTable {...magicTable} />
+            <KeyValueTable {...testSkillsTable} />
+            <ListTable {...testMagicTable} />
             <TextBoxContainer>
-              <p>{background}</p>
+              <p>{testBackground}</p>
               <div>–Rodolf Kazmer</div>
             </TextBoxContainer>
           </SheetBodyContainer>

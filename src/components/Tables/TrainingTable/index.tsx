@@ -9,16 +9,9 @@ interface FieldProps {
 interface TableProps {
   title: string
   fields: FieldProps[]
-  minValue: number
-  maxValue: number
 }
 
-export function TrainingTable({
-  title,
-  fields,
-  minValue,
-  maxValue,
-}: TableProps) {
+export function TrainingTable({ title, fields }: TableProps) {
   const [tableFields, setTableFields] = useState(fields)
 
   function handleFieldValueChange(event: any) {
@@ -48,8 +41,6 @@ export function TrainingTable({
               id={field.fieldKey}
               name={field.fieldKey}
               placeholder="-"
-              min={minValue}
-              max={maxValue}
               value={field.fieldValue}
               onChange={handleFieldValueChange}
             />

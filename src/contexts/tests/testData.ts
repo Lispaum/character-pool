@@ -1,4 +1,4 @@
-export const primaryAttributesTable = {
+export const testPrimaryAttributesTable = {
   title: '',
   minValue: 1,
   maxValue: 20,
@@ -14,7 +14,7 @@ export const primaryAttributesTable = {
   ],
 }
 
-export const secondaryAttributesTable = {
+export const testSecondaryAttributesTable = {
   title: '',
   minValue: 1,
   maxValue: 100,
@@ -29,7 +29,7 @@ export const secondaryAttributesTable = {
   ],
 }
 
-export const skillsTable = {
+export const testSkillsTable = {
   title: 'Skills',
   minValue: 1,
   maxValue: 100,
@@ -45,7 +45,6 @@ export const skillsTable = {
     { fieldKey: 'Athletics', fieldValue: 10 },
     { fieldKey: 'Small Blades', fieldValue: 9 },
     { fieldKey: 'Melee', fieldValue: 7 },
-
     { fieldKey: 'Intimidation', fieldValue: 9 },
     { fieldKey: 'Physique', fieldValue: 6 },
     { fieldKey: 'Resist Coercion', fieldValue: 8 },
@@ -54,19 +53,12 @@ export const skillsTable = {
   ],
 }
 
-export const trainableSkillsTable = {
+export const testTrainableSkillsTable = {
   title: 'Trainable Skills',
-  hasValues: true,
-  minValue: 1,
-  maxValue: 100,
-  fields: [
-    { fieldKey: 'Deduction', fieldValue: 0 },
-    { fieldKey: 'Crossbow', fieldValue: 0 },
-    { fieldKey: 'Stealth', fieldValue: 0 },
-  ],
+  fields: ['Deduction', 'Crossbow', 'Stealth'],
 }
 
-export const magicTable = {
+export const testMagicTable = {
   title: 'Magic',
   fields: [
     'Yrden Sign',
@@ -80,17 +72,18 @@ export const magicTable = {
   ],
 }
 
-export const scrolls = {
+export const testScrollsTable = {
   title: 'Scrolls',
   fields: ['Fire Stream Sign', 'Puppet Sign'],
 }
-export const currentTraining = {
+export const testCurrentTrainingTable = {
   title: 'Training',
-  hasValues: true,
+  minValue: 1,
+  maxValue: 100,
   fields: [{ fieldKey: '-', fieldValue: 0 }],
 }
 
-export const background = ` Geralt of Rivia, Eh? Well there’s a hero if I ever hearda one.
+export const testBackground = ` Geralt of Rivia, Eh? Well there’s a hero if I ever hearda one.
 Ya see witchers ain’t too highly thought of around these parts,
 but Geralt of Rivia’s different. Most witchers don’t get in-
 volved in our affairs. Just sorta pass through town, kill some
