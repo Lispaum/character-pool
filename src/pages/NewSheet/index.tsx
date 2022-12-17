@@ -75,31 +75,17 @@ export function NewSheet() {
     ),
   )
 
-  function handleUpdateField(event: any) {
-    const attributeName = event.target.name
-    const newValue = Number(event.target.value)
+  function updateField(attributeName: string, newValue: number) {
+    // two days of troubleshooting: I was passing a pointer, so I was setting the same object in the end
+    const newTable = { ...primaryAttributesTable }
 
-    console.log('event.target para pai', event.target)
-    console.log(
-      'current',
-      primaryAttributesTable,
-      'name: ',
-      attributeName,
-      'value: ',
-      newValue,
-    )
-    const newTable = primaryAttributesTable
-    let newTableFields = newTable.fields
-
-    newTableFields = newTableFields.map((field) => {
+    newTable.fields = newTable.fields.map((field) => {
       if (field.fieldKey === attributeName) {
         return { ...field, fieldValue: newValue }
       }
 
       return field
     })
-
-    newTable.fields = newTableFields
 
     setPrimaryAttributesTable(newTable)
   }
@@ -130,8 +116,9 @@ export function NewSheet() {
               <span>{totalAttributesSum}</span>
               <PrimaryAttributesTable
                 {...primaryAttributesTable}
-                handleUpdateField={handleUpdateField}
+                updateField={updateField}
               />
+              <KeyValueTable {...primaryAttributesTable} />
               <KeyValueTable {...secondaryAttributesTable} />
 
               <div className="middleBlock">
