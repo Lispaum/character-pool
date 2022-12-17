@@ -21,6 +21,7 @@ import { createContext, useEffect, useState } from 'react'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
 import { ListTable } from '../../components/Tables/ListTable'
 import { TotalSum } from '../../components/Tables/TotalSum'
+import { SecondaryAttributesTable } from '../../components/Tables/SecondaryAttributesTable'
 
 interface KeyValuePair {
   fieldKey: string
@@ -130,21 +131,22 @@ export function NewSheet() {
     const newTable = { ...primaryAttributesTable }
 
     // way#1
-    // let newTableFields = newTable.fields
-    // newTableFields = newTableFields.map((field) => {
-    //   if (field.fieldKey === attributeName)
-    //     return { ...field, fieldValue: newValue }
+    let newTableFields = newTable.fields
+    newTableFields = newTableFields.map((field) => {
+      if (field.fieldKey === attributeName)
+        return { ...field, fieldValue: newValue }
 
-    //   return field
-    // })
+      return field
+    })
 
-    // newTable.fields = newTableFields
+    newTable.fields = newTableFields
+
     // why that doesnt work^^ ??
 
     // way #2
-    newTable.fields.forEach((field) => {
-      if (field.fieldKey === attributeName) field.fieldValue = newValue
-    })
+    // newTable.fields.forEach((field) => {
+    //   if (field.fieldKey === attributeName) field.fieldValue = newValue
+    // })
 
     setPrimaryAttributesTable(newTable)
   }
@@ -172,14 +174,12 @@ export function NewSheet() {
               />
             </SheetHeaderContainer>
             <SheetBodyContainer>
-              {/* <span>{totalAttributesSum}</span> */}
-              <TotalSum title="Sum" sum={totalAttributesSum} />
+              <TotalSum title="" sum={totalAttributesSum} />
               <PrimaryAttributesTable
                 {...primaryAttributesTable}
                 updateField={updateField}
               />
-              <KeyValueTable {...primaryAttributesTable} />
-              <KeyValueTable {...secondaryAttributesTable} />
+              <SecondaryAttributesTable {...secondaryAttributesTable} />
 
               <div className="middleBlock">
                 <img src={characterImage} alt="" />
