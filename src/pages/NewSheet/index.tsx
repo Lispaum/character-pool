@@ -17,7 +17,7 @@ import {
 } from './styles'
 import { KeyValueTable } from '../../components/Tables/KeyValueTable'
 import { PrimaryAttributesTable } from '../../components/Tables/PrimaryAttributesTable'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
 import { ListTable } from '../../components/Tables/ListTable'
 
@@ -45,6 +45,17 @@ interface SheetContextType {
   trainableSkillsTable: ListTableProps
   magicTable: ListTableProps
   scrollsTable: ListTableProps
+}
+
+interface PrimaryAttributes {
+  INT: number
+  REF: number
+  DEX: number
+  BODY: number
+  SPD: number
+  EMP: number
+  CRA: number
+  WILL: number
 }
 
 export const SheetContext = createContext({} as SheetContextType)
@@ -75,16 +86,60 @@ export function NewSheet() {
     ),
   )
 
+  useEffect(() => {
+    const primaryAttributes = {} as PrimaryAttributes
+    primaryAttributesTable.fields.forEach((field) => {
+      primaryAttributes[field.fieldKey] = field.fieldValue
+    })
+
+    setTotalAttributesSum(
+      primaryAttributesTable.fields.reduce(
+        (acc, element) => acc + element.fieldValue,
+        0,
+      ),
+    )
+
+    setSecondaryAttributesTable((currentState) => {
+      const newTable = { ...currentState }
+
+      const modBodyWill = Math.floor(
+        (primaryAttributes.BODY + primaryAttributes.WILL) / 2,
+      )
+
+      newTable.fields = [
+        { fieldKey: 'STUN', fieldValue: modBodyWill * 10 },
+        { fieldKey: 'RUN', fieldValue: primaryAttributes.SPD * 3 },
+        { fieldKey: 'STA', fieldValue: modBodyWill * 5 },
+        { fieldKey: 'ENC', fieldValue: primaryAttributes.BODY * 10 },
+        { fieldKey: 'REC', fieldValue: modBodyWill },
+        { fieldKey: 'HP', fieldValue: modBodyWill * 5 },
+        { fieldKey: 'VIGOR', fieldValue: 7 },
+      ]
+
+      console.log('secondaryAtrs: ', newTable.fields)
+      return { ...currentState, fields: newTable.fields }
+    })
+  }, [primaryAttributesTable])
+
   function updateField(attributeName: string, newValue: number) {
     // two days of troubleshooting: I was passing a pointer, so I was setting the same object in the end
     const newTable = { ...primaryAttributesTable }
 
-    newTable.fields = newTable.fields.map((field) => {
-      if (field.fieldKey === attributeName) {
-        return { ...field, fieldValue: newValue }
-      }
+    // way#1
+    // let newTableFields = newTable.fields
+    // newTableFields = newTableFields.map((field) => {
+    //   if (field.fieldKey === attributeName)
+    //     return { ...field, fieldValue: newValue }
 
-      return field
+    //   return field
+    // })
+
+    // newTable.fields = newTableFields
+    // why that doesnt work^^ ??
+
+    // way #2
+    newTable.fields.forEach((field) => {
+      if (field.fieldKey === attributeName) field.fieldValue = newValue
     })
 
     setPrimaryAttributesTable(newTable)
