@@ -20,6 +20,7 @@ import { PrimaryAttributesTable } from '../../components/Tables/PrimaryAttribute
 import { createContext, useEffect, useState } from 'react'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
 import { ListTable } from '../../components/Tables/ListTable'
+import { TotalSum } from '../../components/Tables/TotalSum'
 
 interface KeyValuePair {
   fieldKey: string
@@ -58,20 +59,23 @@ interface PrimaryAttributes {
   WILL: number
 }
 
-export const SheetContext = createContext({} as SheetContextType)
+export const SheetContext = createContext<SheetContextType>(
+  {} as SheetContextType,
+)
 
 export function NewSheet() {
   const [charName, setCharName] = useState('Your Char Name')
-  const [primaryAttributesTable, setPrimaryAttributesTable] = useState(
-    testPrimaryAttributesTable,
-  )
-  const [secondaryAttributesTable, setSecondaryAttributesTable] = useState(
-    testSecondaryAttributesTable,
-  )
-  const [currentTrainingTable, setCurrentTrainingTable] = useState(
-    testCurrentTrainingTable,
-  )
-  const [skillsTable, setSkillsTable] = useState(testSkillsTable)
+  const [primaryAttributesTable, setPrimaryAttributesTable] =
+    useState<KeyValueTableProps>(testPrimaryAttributesTable)
+
+  const [secondaryAttributesTable, setSecondaryAttributesTable] =
+    useState<KeyValueTableProps>(testSecondaryAttributesTable)
+
+  const [currentTrainingTable, setCurrentTrainingTable] =
+    useState<KeyValueTableProps>(testCurrentTrainingTable)
+
+  const [skillsTable, setSkillsTable] =
+    useState<KeyValueTableProps>(testSkillsTable)
   const [trainableSkillsTable, setTrainableSkillsTable] = useState(
     testTrainableSkillsTable,
   )
@@ -168,7 +172,8 @@ export function NewSheet() {
               />
             </SheetHeaderContainer>
             <SheetBodyContainer>
-              <span>{totalAttributesSum}</span>
+              {/* <span>{totalAttributesSum}</span> */}
+              <TotalSum title="Sum" sum={totalAttributesSum} />
               <PrimaryAttributesTable
                 {...primaryAttributesTable}
                 updateField={updateField}
@@ -178,7 +183,7 @@ export function NewSheet() {
 
               <div className="middleBlock">
                 <img src={characterImage} alt="" />
-                <TrainingTable {...currentTrainingTable} />
+                <KeyValueTable {...currentTrainingTable} />
               </div>
               <div className="skillsBlock">
                 <KeyValueTable {...skillsTable} />

@@ -79,7 +79,7 @@ export const testScrollsTable = {
 export const testCurrentTrainingTable = {
   title: 'Training',
   minValue: 1,
-  maxValue: 100,
+  maxValue: 3,
   fields: [{ fieldKey: '-', fieldValue: 0 }],
 }
 

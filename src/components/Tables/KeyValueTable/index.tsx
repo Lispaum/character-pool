@@ -8,9 +8,9 @@ interface FieldProps {
 
 interface TableProps {
   title: string
-  fields: FieldProps[]
   minValue: number
   maxValue: number
+  fields: FieldProps[]
 }
 
 export function KeyValueTable({
