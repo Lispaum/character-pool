@@ -10,7 +10,7 @@ interface TableProps {
   fields: FieldProps[]
   minValue: number
   maxValue: number
-  updateField: (attributeName: string, newValue: number) => void
+  updatePrimaryAttributeField: (attributeName: string, newValue: number) => void
 }
 
 export function PrimaryAttributesTable({
@@ -18,12 +18,10 @@ export function PrimaryAttributesTable({
   fields,
   minValue,
   maxValue,
-  updateField,
+  updatePrimaryAttributeField,
 }: TableProps) {
-  // const data = useContext(SheetContext)
-
-  function handleUpdateField(event: any) {
-    updateField(event.target.name, Number(event.target.value))
+  function handleUpdatePrimaryAttributeField(event: any) {
+    updatePrimaryAttributeField(event.target.name, Number(event.target.value))
   }
 
   return (
@@ -42,7 +40,7 @@ export function PrimaryAttributesTable({
               min={minValue}
               max={maxValue}
               value={field.fieldValue}
-              onChange={handleUpdateField}
+              onChange={handleUpdatePrimaryAttributeField}
             />
           </FieldContainer>
         )

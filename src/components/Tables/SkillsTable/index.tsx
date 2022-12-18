@@ -10,23 +10,18 @@ interface TableProps {
   fields: FieldProps[]
   minValue: number
   maxValue: number
-  updateTrainingField: (skillName: string, newValue: number) => void
-  updateSkillField: (skillName: string, newValue: number) => void
+  updateSkillField: (attributeName: string, newValue: number) => void
 }
 
-export function TrainingTable({
+export function SkillsTable({
   title,
   fields,
   minValue,
   maxValue,
-  updateTrainingField,
   updateSkillField,
 }: TableProps) {
-  function handleTraining(event: any) {
-    updateTrainingField(event.target.name, Number(event.target.value))
-    if (event.target.value > 3) {
-      updateSkillField(event.target.name, 1)
-    }
+  function handleUpdateField(event: any) {
+    updateSkillField(event.target.name, Number(event.target.value))
   }
 
   return (
@@ -45,7 +40,7 @@ export function TrainingTable({
               min={minValue}
               max={maxValue}
               value={field.fieldValue}
-              onChange={handleTraining}
+              onChange={handleUpdateField}
             />
           </FieldContainer>
         )

@@ -76,11 +76,11 @@ export const testScrollsTable = {
   title: 'Scrolls',
   fields: ['Fire Stream Sign', 'Puppet Sign'],
 }
-export const testCurrentTrainingTable = {
+export const testTrainingTable = {
   title: 'Training',
   minValue: 1,
-  maxValue: 3,
-  fields: [{ fieldKey: '-', fieldValue: 0 }],
+  maxValue: 4,
+  fields: [],
 }
 
 export const testBackground = ` Geralt of Rivia, Eh? Well there’s a hero if I ever hearda one.

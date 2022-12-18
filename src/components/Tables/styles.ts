@@ -23,8 +23,16 @@ export const FieldContainer = styled.div`
     background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
   }
 
-  label {
+  label,
+  button,
+  span,
+  div {
     margin: 0.2rem 0.5rem;
+    background-color: transparent;
+    border: none;
+
+    font-size: inherit;
+    font-family: inherit;
   }
 
   input {

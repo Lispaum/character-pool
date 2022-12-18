@@ -7,7 +7,7 @@ import {
   testSecondaryAttributesTable,
   testScrollsTable,
   testTrainableSkillsTable,
-  testCurrentTrainingTable,
+  testTrainingTable,
 } from '../../contexts/tests/testData'
 import {
   SheetBodyContainer,
@@ -15,13 +15,14 @@ import {
   SheetHeaderContainer,
   TextBoxContainer,
 } from './styles'
-import { KeyValueTable } from '../../components/Tables/KeyValueTable'
 import { PrimaryAttributesTable } from '../../components/Tables/PrimaryAttributesTable'
 import { createContext, useEffect, useState } from 'react'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
 import { ListTable } from '../../components/Tables/ListTable'
 import { TotalSum } from '../../components/Tables/TotalSum'
 import { SecondaryAttributesTable } from '../../components/Tables/SecondaryAttributesTable'
+import { TrainableSkillsTable } from '../../components/Tables/TrainableSkillsTable'
+import { SkillsTable } from '../../components/Tables/SkillsTable'
 
 interface KeyValuePair {
   fieldKey: string
@@ -72,8 +73,8 @@ export function NewSheet() {
   const [secondaryAttributesTable, setSecondaryAttributesTable] =
     useState<KeyValueTableProps>(testSecondaryAttributesTable)
 
-  const [currentTrainingTable, setCurrentTrainingTable] =
-    useState<KeyValueTableProps>(testCurrentTrainingTable)
+  const [trainingTable, setTrainingTable] =
+    useState<KeyValueTableProps>(testTrainingTable)
 
   const [skillsTable, setSkillsTable] =
     useState<KeyValueTableProps>(testSkillsTable)
@@ -121,87 +122,136 @@ export function NewSheet() {
         { fieldKey: 'VIGOR', fieldValue: 7 },
       ]
 
-      console.log('secondaryAtrs: ', newTable.fields)
       return { ...currentState, fields: newTable.fields }
     })
   }, [primaryAttributesTable])
 
-  function updateField(attributeName: string, newValue: number) {
+  function updatePrimaryAttributeField(
+    attributeName: string,
+    newValue: number,
+  ) {
     // two days of troubleshooting: I was passing a pointer, so I was setting the same object in the end
     const newTable = { ...primaryAttributesTable }
 
-    // way#1
-    let newTableFields = newTable.fields
-    newTableFields = newTableFields.map((field) => {
-      if (field.fieldKey === attributeName)
-        return { ...field, fieldValue: newValue }
-
-      return field
+    newTable.fields.forEach((field) => {
+      if (field.fieldKey === attributeName) field.fieldValue = newValue
     })
-
-    newTable.fields = newTableFields
-
-    // why that doesnt work^^ ??
-
-    // way #2
-    // newTable.fields.forEach((field) => {
-    //   if (field.fieldKey === attributeName) field.fieldValue = newValue
-    // })
 
     setPrimaryAttributesTable(newTable)
   }
 
+  function updateSkillField(skillName: string, newValue: number) {
+    const newTable = { ...skillsTable }
+
+    let isNewField: boolean = true
+
+    newTable.fields.forEach((field) => {
+      if (field.fieldKey === skillName) {
+        field.fieldValue = newValue
+        isNewField = false
+      }
+    })
+
+    if (isNewField) {
+      console.log('new field')
+      newTable.fields.push({ fieldKey: skillName, fieldValue: 1 })
+    }
+
+    setSkillsTable(newTable)
+  }
+
+  function updateTrainingField(skillName: string, newValue: number) {
+    const newTable = { ...trainingTable }
+
+    let isNewField: boolean = true
+    let isFinishedTraining: boolean = false
+
+    newTable.fields.forEach((field) => {
+      if (field.fieldKey === skillName) {
+        field.fieldValue = newValue
+        isNewField = false
+
+        if (newValue > 3) {
+          isFinishedTraining = true
+        }
+      }
+    })
+
+    if (isNewField) {
+      newTable.fields.push({ fieldKey: skillName, fieldValue: newValue })
+    } else if (isFinishedTraining) {
+      newTable.fields = newTable.fields.filter(
+        (field) => field.fieldKey !== skillName,
+      )
+    }
+
+    setTrainingTable(newTable)
+  }
+
+  function updateTrainableSkillsField(skillName: string) {
+    const newTable = { ...trainableSkillsTable }
+
+    if (newTable.fields.includes(skillName)) {
+      newTable.fields = newTable.fields.filter((skill) => skill !== skillName)
+    } else {
+      newTable.fields.push(skillName)
+    }
+
+    setTrainableSkillsTable(newTable)
+  }
+
   return (
-    <SheetContext.Provider
-      value={{
-        primaryAttributesTable,
-        secondaryAttributesTable,
-        currentTrainingTable,
-        skillsTable,
-        trainableSkillsTable,
-        magicTable,
-        scrollsTable,
-      }}
-    >
-      <SheetContainer>
-        <form action=" ">
-          <fieldset>
-            <SheetHeaderContainer>
-              <input
-                type="text"
-                value={charName}
-                onChange={(event) => setCharName(event.target.value)}
-              />
-            </SheetHeaderContainer>
-            <SheetBodyContainer>
-              <TotalSum title="" sum={totalAttributesSum} />
-              <PrimaryAttributesTable
-                {...primaryAttributesTable}
-                updateField={updateField}
-              />
-              <SecondaryAttributesTable {...secondaryAttributesTable} />
+    <SheetContainer>
+      <form action=" ">
+        <fieldset>
+          <SheetHeaderContainer>
+            <input
+              type="text"
+              value={charName}
+              onChange={(event) => setCharName(event.target.value)}
+            />
+          </SheetHeaderContainer>
+          <SheetBodyContainer>
+            <TotalSum title="" sum={totalAttributesSum} />
+            <PrimaryAttributesTable
+              {...primaryAttributesTable}
+              updatePrimaryAttributeField={updatePrimaryAttributeField}
+            />
+            <SecondaryAttributesTable {...secondaryAttributesTable} />
 
-              <div className="middleBlock">
-                <img src={characterImage} alt="" />
-                <KeyValueTable {...currentTrainingTable} />
-              </div>
-              <div className="skillsBlock">
-                <KeyValueTable {...skillsTable} />
-                <ListTable {...trainableSkillsTable} />
-              </div>
-              <div className="magicBlock">
-                <ListTable {...magicTable} />
-                <ListTable {...scrollsTable} />
-              </div>
+            <div className="middleBlock">
+              <img src={characterImage} alt="" />
+              <TrainingTable
+                {...trainingTable}
+                updateTrainingField={updateTrainingField}
+                updateSkillField={updateSkillField}
+              />
+            </div>
 
-              <TextBoxContainer>
-                <p>{background}</p>
-                <div>–Rodolf Kazmer</div>
-              </TextBoxContainer>
-            </SheetBodyContainer>
-          </fieldset>
-        </form>
-      </SheetContainer>
-    </SheetContext.Provider>
+            <div className="skillsBlock">
+              <SkillsTable
+                {...skillsTable}
+                updateSkillField={updateSkillField}
+              />
+              <TrainableSkillsTable
+                {...trainableSkillsTable}
+                updateTrainingField={updateTrainingField}
+                updateTrainableSkillsField={updateTrainableSkillsField}
+              />
+            </div>
+
+            <div className="magicBlock">
+              <ListTable {...magicTable} />
+              <ListTable {...scrollsTable} />
+            </div>
+
+            <TextBoxContainer>
+              <p>{background}</p>
+              <div>–Rodolf Kazmer</div>
+            </TextBoxContainer>
+          </SheetBodyContainer>
+        </fieldset>
+      </form>
+    </SheetContainer>
   )
 }
