@@ -95,7 +95,9 @@ export function NewSheet() {
   useEffect(() => {
     const primaryAttributes = {} as PrimaryAttributes
     primaryAttributesTable.fields.forEach((field) => {
-      primaryAttributes[field.fieldKey] = field.fieldValue
+      // TODO: understand this thing lol
+      primaryAttributes[field.fieldKey as keyof typeof primaryAttributes] =
+        field.fieldValue
     })
 
     setTotalAttributesSum(
