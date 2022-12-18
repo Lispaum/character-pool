@@ -153,7 +153,6 @@ export function NewSheet() {
     })
 
     if (isNewField) {
-      console.log('new field')
       newTable.fields.push({ fieldKey: skillName, fieldValue: 1 })
     }
 
