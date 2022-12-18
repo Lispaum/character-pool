@@ -23,6 +23,8 @@ import { TotalSum } from '../../components/Tables/TotalSum'
 import { SecondaryAttributesTable } from '../../components/Tables/SecondaryAttributesTable'
 import { TrainableSkillsTable } from '../../components/Tables/TrainableSkillsTable'
 import { SkillsTable } from '../../components/Tables/SkillsTable'
+import { ScrollsTable } from '../../components/Tables/ScrollsTable'
+import { MagicTable } from '../../components/Tables/MagicTable'
 
 interface KeyValuePair {
   fieldKey: string
@@ -143,30 +145,6 @@ export function NewSheet() {
     setPrimaryAttributesTable(newTable)
   }
 
-  function updateSkillField(skillName: string, newValue: number) {
-    const newTable = { ...skillsTable }
-
-    let isNewField: boolean = true
-    const isForgotSkill: boolean = newValue === 0
-
-    newTable.fields.forEach((field) => {
-      if (field.fieldKey === skillName) {
-        field.fieldValue = newValue
-        isNewField = false
-      }
-    })
-
-    if (isNewField) {
-      newTable.fields.push({ fieldKey: skillName, fieldValue: 1 })
-    } else if (isForgotSkill) {
-      newTable.fields = newTable.fields.filter(
-        (field) => field.fieldKey !== skillName,
-      )
-    }
-
-    setSkillsTable(newTable)
-  }
-
   function updateTrainingField(skillName: string, newValue: number) {
     const newTable = { ...trainingTable }
 
@@ -195,6 +173,30 @@ export function NewSheet() {
     setTrainingTable(newTable)
   }
 
+  function updateSkillField(skillName: string, newValue: number) {
+    const newTable = { ...skillsTable }
+
+    let isNewField: boolean = true
+    const isForgotSkill: boolean = newValue === 0
+
+    newTable.fields.forEach((field) => {
+      if (field.fieldKey === skillName) {
+        field.fieldValue = newValue
+        isNewField = false
+      }
+    })
+
+    if (isNewField) {
+      newTable.fields.push({ fieldKey: skillName, fieldValue: 1 })
+    } else if (isForgotSkill) {
+      newTable.fields = newTable.fields.filter(
+        (field) => field.fieldKey !== skillName,
+      )
+    }
+
+    setSkillsTable(newTable)
+  }
+
   function updateTrainableSkillsField(skillName: string) {
     const newTable = { ...trainableSkillsTable }
 
@@ -205,6 +207,30 @@ export function NewSheet() {
     }
 
     setTrainableSkillsTable(newTable)
+  }
+
+  function updateMagicField(magicName: string) {
+    const newTable = { ...magicTable }
+
+    if (newTable.fields.includes(magicName)) {
+      newTable.fields = newTable.fields.filter((skill) => skill !== magicName)
+    } else {
+      newTable.fields.push(magicName)
+    }
+
+    setMagicTable(newTable)
+  }
+
+  function updateScrollsField(magicName: string) {
+    const newTable = { ...scrollsTable }
+
+    if (newTable.fields.includes(magicName)) {
+      newTable.fields = newTable.fields.filter((skill) => skill !== magicName)
+    } else {
+      newTable.fields.push(magicName)
+    }
+
+    setScrollsTable(newTable)
   }
 
   return (
@@ -232,6 +258,7 @@ export function NewSheet() {
                 {...trainingTable}
                 updateTrainingField={updateTrainingField}
                 updateSkillField={updateSkillField}
+                updateMagicField={updateMagicField}
               />
             </div>
 
@@ -249,8 +276,16 @@ export function NewSheet() {
             </div>
 
             <div className="magicBlock">
-              <ListTable {...magicTable} />
-              <ListTable {...scrollsTable} />
+              <MagicTable
+                {...magicTable}
+                updateMagicField={updateMagicField}
+                updateScrollsField={updateScrollsField}
+              />
+              <ScrollsTable
+                {...scrollsTable}
+                updateTrainingField={updateTrainingField}
+                updateScrollsField={updateScrollsField}
+              />
             </div>
 
             <TextBoxContainer>

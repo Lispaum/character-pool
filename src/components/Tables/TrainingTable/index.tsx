@@ -12,6 +12,7 @@ interface TableProps {
   maxValue: number
   updateTrainingField: (skillName: string, newValue: number) => void
   updateSkillField: (skillName: string, newValue: number) => void
+  updateMagicField: (magicName: string) => void
 }
 
 export function TrainingTable({
@@ -21,11 +22,20 @@ export function TrainingTable({
   maxValue,
   updateTrainingField,
   updateSkillField,
+  updateMagicField,
 }: TableProps) {
   function handleTraining(event: any) {
-    updateTrainingField(event.target.name, Number(event.target.value))
-    if (event.target.value > maxValue - 1) {
-      updateSkillField(event.target.name, 1)
+    const fieldName = event.target.name
+    const fieldValue = event.target.value
+
+    updateTrainingField(fieldName, Number(fieldValue))
+
+    if (fieldValue > maxValue - 1) {
+      if (fieldName.includes('Sign')) {
+        updateMagicField(fieldName)
+      } else {
+        updateSkillField(fieldName, 1)
+      }
     }
   }
 
