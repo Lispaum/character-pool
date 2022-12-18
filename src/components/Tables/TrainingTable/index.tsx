@@ -24,7 +24,7 @@ export function TrainingTable({
 }: TableProps) {
   function handleTraining(event: any) {
     updateTrainingField(event.target.name, Number(event.target.value))
-    if (event.target.value > 3) {
+    if (event.target.value > maxValue - 1) {
       updateSkillField(event.target.name, 1)
     }
   }

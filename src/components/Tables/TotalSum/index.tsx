@@ -9,9 +9,7 @@ export function TotalSum({ title, sum }: TotalSumProps) {
   return (
     <TableContainer>
       <h1>{title}</h1>
-      <FieldContainer key={title}>
-        <label htmlFor={title}>{sum}</label>
-      </FieldContainer>
+      <FieldContainer key={title}>{sum}</FieldContainer>
     </TableContainer>
   )
 }

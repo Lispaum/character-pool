@@ -11,6 +11,7 @@ interface TableProps {
   minValue: number
   maxValue: number
   updateSkillField: (attributeName: string, newValue: number) => void
+  updateTrainableSkillsField: (skillName: string) => void
 }
 
 export function SkillsTable({
@@ -19,9 +20,14 @@ export function SkillsTable({
   minValue,
   maxValue,
   updateSkillField,
+  updateTrainableSkillsField,
 }: TableProps) {
   function handleUpdateField(event: any) {
     updateSkillField(event.target.name, Number(event.target.value))
+
+    if (event.target.value < minValue + 1) {
+      updateTrainableSkillsField(event.target.name)
+    }
   }
 
   return (

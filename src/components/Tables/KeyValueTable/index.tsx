@@ -20,7 +20,6 @@ export function KeyValueTable({
   maxValue,
 }: TableProps) {
   const [tableFields, setTableFields] = useState(fields)
-  // const data = useContext(SheetContext)
   function handleFieldValueChange(event: any) {
     let newTableFields = tableFields
 

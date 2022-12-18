@@ -144,6 +144,7 @@ export function NewSheet() {
     const newTable = { ...skillsTable }
 
     let isNewField: boolean = true
+    const isForgotSkill: boolean = newValue === 0
 
     newTable.fields.forEach((field) => {
       if (field.fieldKey === skillName) {
@@ -154,6 +155,10 @@ export function NewSheet() {
 
     if (isNewField) {
       newTable.fields.push({ fieldKey: skillName, fieldValue: 1 })
+    } else if (isForgotSkill) {
+      newTable.fields = newTable.fields.filter(
+        (field) => field.fieldKey !== skillName,
+      )
     }
 
     setSkillsTable(newTable)
@@ -231,6 +236,7 @@ export function NewSheet() {
               <SkillsTable
                 {...skillsTable}
                 updateSkillField={updateSkillField}
+                updateTrainableSkillsField={updateTrainableSkillsField}
               />
               <TrainableSkillsTable
                 {...trainableSkillsTable}

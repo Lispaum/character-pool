@@ -31,7 +31,7 @@ export const testSecondaryAttributesTable = {
 
 export const testSkillsTable = {
   title: 'Skills',
-  minValue: 1,
+  minValue: 0,
   maxValue: 100,
   fields: [
     { fieldKey: 'Awareness', fieldValue: 9 },
