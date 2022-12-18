@@ -95,6 +95,7 @@ export function NewSheet() {
   useEffect(() => {
     const primaryAttributes = {} as PrimaryAttributes
     primaryAttributesTable.fields.forEach((field) => {
+      console.log(typeof primaryAttributes)
       // TODO: understand this thing lol
       primaryAttributes[field.fieldKey as keyof typeof primaryAttributes] =
         field.fieldValue
