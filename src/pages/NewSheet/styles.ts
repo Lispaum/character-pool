@@ -45,4 +45,5 @@ export const SheetBodyContainer = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  flex-wrap: wrap;
 `

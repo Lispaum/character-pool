@@ -8,6 +8,7 @@ export const TableContainer = styled.div`
     font-size: 1.4rem;
     text-align: center;
     background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
+    padding: 0 0.5rem;
   }
 `
 
@@ -33,6 +34,10 @@ export const FieldContainer = styled.div`
 
     font-size: inherit;
     font-family: inherit;
+  }
+
+  div {
+    margin: 0.2rem 0.2rem;
   }
 
   input {

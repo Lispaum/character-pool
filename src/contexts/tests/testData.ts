@@ -21,9 +21,9 @@ export const testSecondaryAttributesTable = {
   fields: [
     { fieldKey: 'STUN', fieldValue: 8 },
     { fieldKey: 'RUN', fieldValue: 27 },
-    { fieldKey: 'STA', fieldValue: 5 },
-    { fieldKey: 'ENC', fieldValue: 40 },
-    { fieldKey: 'REC', fieldValue: 80 },
+    { fieldKey: 'STA', fieldValue: 40 },
+    { fieldKey: 'ENC', fieldValue: 80 },
+    { fieldKey: 'REC', fieldValue: 8 },
     { fieldKey: 'HP', fieldValue: 55 },
     { fieldKey: 'VIGOR', fieldValue: 7 },
   ],
