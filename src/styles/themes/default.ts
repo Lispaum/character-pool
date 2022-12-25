@@ -1,3 +1,12 @@
+export interface ThemeType {
+  themeName: string
+  backgroundColor: string
+  textColor: string
+  'fill-A': string
+  'fill-B': string
+  headerColor: string
+}
+
 export const lightTheme = {
   themeName: 'lightTheme',
   backgroundColor: 'whitesmoke',

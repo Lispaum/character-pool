@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
+import { ThemeType } from '../themes/default'
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
 *{
     margin: 0;
     padding: 0;
@@ -10,10 +11,10 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-    background-color: whitesmoke;//ivory, lightgrey
-    /* background-color: ${(props) => props.theme.backgroundColor ?? 'blue'}; */
+    /* background-color: whitesmoke;//ivory, lightgrey */
+    background-color: ${(props) => props.theme.backgroundColor ?? 'blue'};
 
-    /* color: ${(props) => props.theme.textColor ?? 'white'}; */
+    color: ${(props) => props.theme.textColor ?? 'white'};
 }
 
 :focus{
