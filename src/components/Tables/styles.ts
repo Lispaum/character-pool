@@ -7,7 +7,7 @@ export const TableContainer = styled.div`
   h1 {
     font-size: 1.4rem;
     text-align: center;
-    background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
+    background-color: ${(props) => props.theme['fill-B'] ?? ''};
     padding: 0 0.5rem;
   }
 `
@@ -17,11 +17,11 @@ export const FieldContainer = styled.div`
   justify-content: space-between;
   font-family: Georgia, 'Times New Roman', Times, serif;
 
-  color: ${(props) => props.theme['white-100'] ?? 'black'};
-  background-color: ${(props) => props.theme['cyan-100'] ?? 'cyan'};
+  color: ${(props) => props.theme.textColor ?? 'white'};
+  background-color: ${(props) => props.theme['fill-A'] ?? ''};
 
   :nth-child(odd) {
-    background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
+    background-color: ${(props) => props.theme['fill-B'] ?? ''};
   }
 
   label,

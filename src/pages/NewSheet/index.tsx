@@ -18,7 +18,6 @@ import {
 import { PrimaryAttributesTable } from '../../components/Tables/PrimaryAttributesTable'
 import { createContext, useEffect, useState } from 'react'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
-import { ListTable } from '../../components/Tables/ListTable'
 import { TotalSum } from '../../components/Tables/TotalSum'
 import { SecondaryAttributesTable } from '../../components/Tables/SecondaryAttributesTable'
 import { TrainableSkillsTable } from '../../components/Tables/TrainableSkillsTable'
@@ -68,7 +67,7 @@ export const SheetContext = createContext<SheetContextType>(
 )
 
 export function NewSheet() {
-  const [charName, setCharName] = useState('Your Char Name')
+  const [charName, setCharName] = useState('')
   const [primaryAttributesTable, setPrimaryAttributesTable] =
     useState<KeyValueTableProps>(testPrimaryAttributesTable)
 
@@ -240,6 +239,7 @@ export function NewSheet() {
           <SheetHeaderContainer>
             <input
               type="text"
+              placeholder="Character Name"
               value={charName}
               onChange={(event) => setCharName(event.target.value)}
             />

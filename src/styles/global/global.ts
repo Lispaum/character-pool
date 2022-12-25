@@ -5,12 +5,15 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: inherit;
 
 }
 
 body{
-    background-color: whitesmoke;//ivory, lightgrey
-    /* color: #fff; */
+    /* background-color: whitesmoke;//ivory, lightgrey */
+    background-color: ${(props) => props.theme.backgroundColor ?? 'blue'};
+
+    color: ${(props) => props.theme.textColor ?? 'white'};
 }
 
 :focus{

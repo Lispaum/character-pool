@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   max-width: 100%;
 
-  background-color: ${(props) => props.theme['cyan-100'] ?? 'cyan'};
+  background-color: ${(props) => props.theme.headerColor ?? ''};
   img {
     width: 3.2rem;
     margin-right: 0.5rem;
@@ -40,7 +40,7 @@ export const HeaderContainer = styled.header`
       &.active {
         font-weight: bold;
         border-bottom: 2px solid blueviolet;
-        background-color: ${(props) => props.theme['cyan-300'] ?? 'cyan'};
+        background-color: ${(props) => props.theme['fill-B'] ?? ''};
       }
     }
   }

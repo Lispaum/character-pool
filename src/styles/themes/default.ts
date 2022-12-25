@@ -1,6 +1,17 @@
-export const defaultTheme = {
-  primary: 'purple',
-  secondary: 'orange',
-  'cyan-100': '#E9F3F8',
-  'cyan-300': '#B9DAEB',
+export const lightTheme = {
+  themeName: 'lightTheme',
+  backgroundColor: 'whitesmoke',
+  textColor: 'black',
+  'fill-A': '#E9F3F8',
+  'fill-B': '#B9DAEB',
+  headerColor: '#2885B3',
+}
+
+export const darkTheme = {
+  themeName: 'darkTheme',
+  backgroundColor: '#1e2021',
+  textColor: '#e8e6e3',
+  'fill-A': '#202324',
+  'fill-B': '#313638',
+  headerColor: '#2885B3',
 }
