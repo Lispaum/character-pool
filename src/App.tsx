@@ -21,17 +21,10 @@ interface GlobalContextType {
 export const GlobalContext = createContext({} as GlobalContextType)
 
 export function App() {
-  const [theme, setTheme] = useState(lightTheme)
+  const [theme, setTheme] = useState(darkTheme)
 
   function toggleTheme() {
-    const newTheme = theme.themeName === 'darkTheme' ? lightTheme : darkTheme
-    console.log(
-      'currentTheme:',
-      theme.themeName,
-      'newTheme:',
-      newTheme.themeName,
-    )
-    setTheme(newTheme)
+    setTheme(theme.themeName === 'darkTheme' ? lightTheme : darkTheme)
   }
 
   return (

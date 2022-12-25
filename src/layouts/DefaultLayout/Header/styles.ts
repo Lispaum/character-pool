@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   max-width: 100%;
 
-  background-color: ${(props) => props.theme.backgroundColor ?? ''};
+  background-color: ${(props) => props.theme.headerColor ?? ''};
   img {
     width: 3.2rem;
     margin-right: 0.5rem;
