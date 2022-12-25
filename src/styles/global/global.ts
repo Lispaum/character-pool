@@ -10,10 +10,10 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-    /* background-color: whitesmoke;//ivory, lightgrey */
-    background-color: ${(props) => props.theme.backgroundColor ?? 'blue'};
+    background-color: whitesmoke;//ivory, lightgrey
+    /* background-color: ${(props) => props.theme.backgroundColor ?? 'blue'}; */
 
-    color: ${(props) => props.theme.textColor ?? 'white'};
+    /* color: ${(props) => props.theme.textColor ?? 'white'}; */
 }
 
 :focus{
