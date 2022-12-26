@@ -25,9 +25,28 @@ export function TrainingTable({
   updateMagicField,
 }: TableProps) {
   function handleTraining(event: any) {
+    event.stopPropagation()
     const fieldName = event.target.name
     const fieldValue = event.target.value
 
+    console.log(event)
+    updateTrainingField(fieldName, Number(fieldValue))
+
+    if (fieldValue > maxValue - 1) {
+      if (fieldName.includes('Sign')) {
+        updateMagicField(fieldName)
+      } else {
+        updateSkillField(fieldName, 1)
+      }
+    }
+  }
+
+  function handleTrainingByDrop(event: any) {
+    event.stopPropagation()
+    const fieldName = event.target.name
+    const fieldValue = event.target.value
+
+    console.log(event)
     updateTrainingField(fieldName, Number(fieldValue))
 
     if (fieldValue > maxValue - 1) {
@@ -40,7 +59,7 @@ export function TrainingTable({
   }
 
   return (
-    <TableContainer>
+    <TableContainer onDrop={handleTrainingByDrop}>
       <h1>{title}</h1>
 
       {fields.map((field: FieldProps) => {

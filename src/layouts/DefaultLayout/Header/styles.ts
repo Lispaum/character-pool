@@ -7,9 +7,11 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   max-width: 100%;
 
-  background-color: ${(props) => props.theme.headerColor ?? ''};
+  background-color: ${(props) => props.theme.headerColor};
+
+  max-height: 2.5rem;
   img {
-    width: 3.2rem;
+    height: 2.5rem;
     margin-right: 0.5rem;
   }
 
@@ -17,6 +19,7 @@ export const HeaderContainer = styled.header`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
 
     a {
       display: flex;
@@ -24,7 +27,7 @@ export const HeaderContainer = styled.header`
       align-items: center;
 
       width: auto;
-      height: 3rem;
+      height: 2rem;
       padding: 0 0.4rem;
 
       color: black;
@@ -45,13 +48,41 @@ export const HeaderContainer = styled.header`
     }
   }
 
-  span {
+  div {
     font-size: 0.8rem;
-    margin: 0 1rem;
+
+    button {
+      background-color: ${(props) => props.theme['fill-A']};
+      border: none;
+      border-radius: 50px;
+      padding: 2rem 2rem 0 0;
+      width: 0;
+      height: 0;
+    }
+
+    span {
+      text-overflow: clip;
+    }
 
     img {
-      margin: 0 1rem;
-      width: 1.2rem;
+      height: 2rem;
+    }
+
+    :last-of-type {
+      display: flex;
+      flex-direction: row;
+    }
+
+    @media only screen and (max-width: 600px) {
+      :last-of-type {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: row;
+      }
     }
   }
 `

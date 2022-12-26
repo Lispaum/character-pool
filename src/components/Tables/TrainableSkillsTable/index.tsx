@@ -25,7 +25,12 @@ export function TrainableSkillsTable({
       {fields.map((field: string) => {
         return (
           <FieldContainer key={field}>
-            <button type="button" name={field} onClick={handleTrainSkill}>
+            <button
+              draggable="true"
+              type="button"
+              name={field}
+              onClick={handleTrainSkill}
+            >
               {field}
             </button>
           </FieldContainer>

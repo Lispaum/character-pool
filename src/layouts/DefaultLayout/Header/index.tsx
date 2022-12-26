@@ -10,23 +10,22 @@ export function Header() {
   const { toggleTheme } = useContext(GlobalContext)
   return (
     <HeaderContainer>
+      <a
+        href="https://youtu.be/LDU_Txk06tM?t=65"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img src={logoLipaum} alt="logo-lipaum"></img>
+      </a>
       <nav>
-        <a
-          href="https://youtu.be/LDU_Txk06tM?t=65"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src={logoLipaum} alt="logo-lipaum"></img>
-        </a>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/sheets">Sheets</NavLink>
         <NavLink to="/new-sheet">New Sheet</NavLink>
         <NavLink to="/guide">Guide</NavLink>
       </nav>
-      <div className="headerUpperRight">
-        <button onClick={toggleTheme}>Toggle Theme</button>
-        <span>
-          (Under Construction)
+      <div className="headerRight">
+        <div className="buttons">
+          <button onClick={toggleTheme}></button>
           <a
             href="https://github.com/Lispaum/character-pool/tree/main/src"
             target="_blank"
@@ -34,7 +33,8 @@ export function Header() {
           >
             <img src={logoGitHub} alt="logo-github"></img>
           </a>
-        </span>
+        </div>
+        <span>(Under Construction)</span>
       </div>
     </HeaderContainer>
   )

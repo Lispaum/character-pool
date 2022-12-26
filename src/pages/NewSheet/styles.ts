@@ -23,12 +23,34 @@ export const SheetHeaderContainer = styled.div`
     color: darkblue;
     text-align: center;
   }
+
+  @media only screen and (max-width: 600px) {
+    input {
+      width: 100%;
+      margin: 1rem;
+    }
+  }
 `
 
-export const SkillsTableContainer = styled.div`
-  border: 1px solid black;
-  margin: 0.25rem;
+export const SheetBodyContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  img {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  @media only screen and (max-width: 600px) {
+  }
 `
+
+// export const SkillsTableContainer = styled.div`
+//   border: 1px solid black;
+//   margin: 0.25rem;
+// `
 
 export const TextBoxContainer = styled.div`
   width: 23%;
@@ -40,10 +62,11 @@ export const TextBoxContainer = styled.div`
   div {
     text-align: end;
   }
-`
-export const SheetBodyContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    padding-top: 1rem;
+    border-top: 1px solid white;
+    margin-top: 1rem;
+  }
 `

@@ -20,6 +20,7 @@ export function SecondaryAttributesTable({ title, fields }: TableProps) {
           <FieldContainer key={field.fieldKey}>
             <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
             <input
+              readOnly
               type="number"
               id={field.fieldKey}
               name={field.fieldKey}

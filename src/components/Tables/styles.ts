@@ -28,12 +28,14 @@ export const FieldContainer = styled.div`
   button,
   span,
   div {
+    width: 100%;
     margin: 0.2rem 0.5rem;
     background-color: transparent;
     border: none;
 
     font-size: inherit;
     font-family: inherit;
+    text-align: left;
   }
 
   div {
