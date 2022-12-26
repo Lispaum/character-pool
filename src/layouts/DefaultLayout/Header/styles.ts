@@ -10,9 +10,17 @@ export const HeaderContainer = styled.header`
   background-color: ${(props) => props.theme.headerColor};
 
   max-height: 2.5rem;
+
+  @media only screen and (max-width: 600px) {
+    max-height: 4rem;
+  }
+
   img {
     height: 2.5rem;
     margin-right: 0.5rem;
+    @media only screen and (max-width: 600px) {
+      height: 4rem;
+    }
   }
 
   nav {
@@ -61,7 +69,7 @@ export const HeaderContainer = styled.header`
     }
 
     span {
-      text-overflow: clip;
+      font-size: 0.8em;
     }
 
     img {
@@ -75,7 +83,7 @@ export const HeaderContainer = styled.header`
 
     @media only screen and (max-width: 600px) {
       :last-of-type {
-        display: flex;
+        min-width: 8rem;
         flex-direction: column;
       }
 
