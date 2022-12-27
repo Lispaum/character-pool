@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { SheetContext } from '../../../pages/NewSheet'
 import { FieldContainer, TableContainer } from '../styles'
 
 interface FieldProps {
@@ -5,23 +7,21 @@ interface FieldProps {
   fieldValue: number
 }
 
-interface TableProps {
-  title: string
-  fields: FieldProps[]
-  minValue: number
-  maxValue: number
-  updateSkillField: (attributeName: string, newValue: number) => void
-  updateTrainableSkillsField: (skillName: string) => void
-}
+// interface TableProps {
+//   title: string
+//   fields: FieldProps[]
+//   minValue: number
+//   maxValue: number
+//   updateSkillField: (attributeName: string, newValue: number) => void
+//   updateTrainableSkillsField: (skillName: string) => void
+// }
 
-export function SkillsTable({
-  title,
-  fields,
-  minValue,
-  maxValue,
-  updateSkillField,
-  updateTrainableSkillsField,
-}: TableProps) {
+export function SkillsTable() {
+  const { skillsTable, updateSkillField, updateTrainableSkillsField } =
+    useContext(SheetContext)
+
+  const { title, fields, minValue, maxValue } = skillsTable
+
   function handleUpdateField(event: any) {
     updateSkillField(event.target.name, Number(event.target.value))
 

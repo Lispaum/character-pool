@@ -16,7 +16,7 @@ import {
   TextBoxContainer,
 } from './styles'
 import { PrimaryAttributesTable } from '../../components/Tables/PrimaryAttributesTable'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { TrainingTable } from '../../components/Tables/TrainingTable'
 import { TotalSum } from '../../components/Tables/TotalSum'
 import { SecondaryAttributesTable } from '../../components/Tables/SecondaryAttributesTable'
@@ -44,11 +44,18 @@ interface ListTableProps {
 interface SheetContextType {
   primaryAttributesTable: KeyValueTableProps
   secondaryAttributesTable: KeyValueTableProps
-  currentTrainingTable: KeyValueTableProps
+  trainingTable: KeyValueTableProps
   skillsTable: KeyValueTableProps
   trainableSkillsTable: ListTableProps
   magicTable: ListTableProps
   scrollsTable: ListTableProps
+  updatePrimaryAttributeField: (attributeName: string, newValue: number) => void
+  updateTrainingField: (skillName: string, newValue: number) => void
+  updateSkillField: (skillName: string, newValue: number) => void
+  updateMagicField: (magicName: string) => void
+  updateTrainableSkillsField: (skillName: string) => void
+  updateDraggingField: (element: any) => void
+  updateScrollsField: (skillName: string) => void
 }
 
 interface PrimaryAttributes {
@@ -93,6 +100,8 @@ export function NewSheet() {
     ),
   )
 
+  const [draggingField, setDraggingField] = useState<ReactNode>()
+
   useEffect(() => {
     const primaryAttributes = {} as PrimaryAttributes
     primaryAttributesTable.fields.forEach((field) => {
@@ -134,7 +143,6 @@ export function NewSheet() {
     attributeName: string,
     newValue: number,
   ) {
-    // two days of troubleshooting: I was passing a pointer, so I was setting the same object in the end
     const newTable = { ...primaryAttributesTable }
 
     newTable.fields.forEach((field) => {
@@ -232,69 +240,69 @@ export function NewSheet() {
     setScrollsTable(newTable)
   }
 
+  function updateDraggingField(element: any) {
+    console.log(element)
+    setDraggingField(element)
+  }
+
   return (
-    <SheetContainer>
-      <form action=" ">
-        <fieldset>
-          <SheetHeaderContainer>
-            <input
-              type="text"
-              placeholder="Character Name"
-              value={charName}
-              onChange={(event) => setCharName(event.target.value)}
-            />
-          </SheetHeaderContainer>
-          <SheetBodyContainer>
-            <TotalSum title="" sum={totalAttributesSum} />
-            <PrimaryAttributesTable
-              {...primaryAttributesTable}
-              updatePrimaryAttributeField={updatePrimaryAttributeField}
-            />
-            <SecondaryAttributesTable {...secondaryAttributesTable} />
+    <SheetContext.Provider
+      value={{
+        primaryAttributesTable,
+        secondaryAttributesTable,
+        trainingTable,
+        skillsTable,
+        trainableSkillsTable,
+        magicTable,
+        scrollsTable,
+        updatePrimaryAttributeField,
+        updateTrainingField,
+        updateSkillField,
+        updateTrainableSkillsField,
+        updateMagicField,
+        updateScrollsField,
+        updateDraggingField,
+      }}
+    >
+      <SheetContainer>
+        <form action=" ">
+          <fieldset>
+            <SheetHeaderContainer>
+              <input
+                type="text"
+                placeholder="Character Name"
+                value={charName}
+                onChange={(event) => setCharName(event.target.value)}
+              />
+            </SheetHeaderContainer>
+            <SheetBodyContainer>
+              <TotalSum title="" sum={totalAttributesSum} />
+              <PrimaryAttributesTable />
+              <SecondaryAttributesTable />
 
-            <div className="middleBlock">
-              <img src={characterImage} alt="" />
-              <TrainingTable
-                {...trainingTable}
-                updateTrainingField={updateTrainingField}
-                updateSkillField={updateSkillField}
-                updateMagicField={updateMagicField}
-              />
-            </div>
+              <div className="middleBlock">
+                <img src={characterImage} alt="" />
+                <TrainingTable />
+              </div>
 
-            <div className="skillsBlock">
-              <SkillsTable
-                {...skillsTable}
-                updateSkillField={updateSkillField}
-                updateTrainableSkillsField={updateTrainableSkillsField}
-              />
-              <TrainableSkillsTable
-                {...trainableSkillsTable}
-                updateTrainingField={updateTrainingField}
-                updateTrainableSkillsField={updateTrainableSkillsField}
-              />
-            </div>
+              <div className="skillsBlock">
+                <SkillsTable />
+                <TrainableSkillsTable />
+              </div>
 
-            <div className="magicBlock">
-              <MagicTable
-                {...magicTable}
-                updateMagicField={updateMagicField}
-                updateScrollsField={updateScrollsField}
-              />
-              <ScrollsTable
-                {...scrollsTable}
-                updateTrainingField={updateTrainingField}
-                updateScrollsField={updateScrollsField}
-              />
-            </div>
+              <div className="magicBlock">
+                <MagicTable />
+                <ScrollsTable />
+              </div>
 
-            <TextBoxContainer>
-              <p>{background}</p>
-              <div>–Rodolf Kazmer</div>
-            </TextBoxContainer>
-          </SheetBodyContainer>
-        </fieldset>
-      </form>
-    </SheetContainer>
+              <TextBoxContainer>
+                <p>{background}</p>
+                <div>–Rodolf Kazmer</div>
+              </TextBoxContainer>
+            </SheetBodyContainer>
+          </fieldset>
+        </form>
+      </SheetContainer>
+    </SheetContext.Provider>
   )
 }

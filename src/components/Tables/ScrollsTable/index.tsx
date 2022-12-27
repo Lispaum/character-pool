@@ -1,18 +1,13 @@
+import { useContext } from 'react'
+import { SheetContext } from '../../../pages/NewSheet'
 import { FieldContainer, TableContainer } from '../styles'
 
-interface TableProps {
-  title: string
-  fields: string[]
-  updateTrainingField: (skillName: string, newValue: number) => void
-  updateScrollsField: (skillName: string) => void
-}
+export function ScrollsTable() {
+  const { scrollsTable, updateTrainingField, updateScrollsField } =
+    useContext(SheetContext)
 
-export function ScrollsTable({
-  title,
-  fields,
-  updateTrainingField,
-  updateScrollsField,
-}: TableProps) {
+  const { title, fields } = scrollsTable
+
   function handleTrainScroll(event: any) {
     updateScrollsField(event.target.name)
     updateTrainingField(event.target.name, 0)

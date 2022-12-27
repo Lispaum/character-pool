@@ -1,18 +1,13 @@
+import { useContext } from 'react'
+import { SheetContext } from '../../../pages/NewSheet'
 import { FieldContainer, TableContainer } from '../styles'
 
-interface TableProps {
-  title: string
-  fields: string[]
-  updateMagicField: (magicName: string) => void
-  updateScrollsField: (magicName: string) => void
-}
+export function MagicTable() {
+  const { magicTable, updateMagicField, updateScrollsField } =
+    useContext(SheetContext)
 
-export function MagicTable({
-  title,
-  fields,
-  updateMagicField,
-  updateScrollsField,
-}: TableProps) {
+  const { title, fields } = magicTable
+
   function handleUpdateField(event: any) {
     updateScrollsField(event.target.name)
     updateMagicField(event.target.name)

@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { SheetContext } from '../../../pages/NewSheet'
 import { FieldContainer, TableContainer } from '../styles'
 
 interface FieldProps {
@@ -5,12 +7,11 @@ interface FieldProps {
   fieldValue: number
 }
 
-interface TableProps {
-  title: string
-  fields: FieldProps[]
-}
+export function SecondaryAttributesTable() {
+  const { secondaryAttributesTable } = useContext(SheetContext)
 
-export function SecondaryAttributesTable({ title, fields }: TableProps) {
+  const { title, fields } = secondaryAttributesTable
+
   return (
     <TableContainer>
       <h1>{title}</h1>
