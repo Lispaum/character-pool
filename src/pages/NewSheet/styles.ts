@@ -52,12 +52,20 @@ export const SheetBodyContainer = styled.div`
 //   margin: 0.25rem;
 // `
 
-export const TextBoxContainer = styled.div`
+export const BackgroundContainer = styled.div`
   width: 23%;
   margin: 0rem 2rem;
 
   font-size: 1rem;
   text-align: justify;
+
+  overflow-y: auto;
+
+  input {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+  }
 
   div {
     text-align: end;

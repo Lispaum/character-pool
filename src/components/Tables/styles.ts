@@ -55,9 +55,10 @@ export const FieldContainer = styled.div`
     -moz-appearance: textfield;
   }
 
-  input[type='number']:focus {
+  input[type='number']:not(:read-only):focus {
     -moz-appearance: unset;
   }
+
   input[type='number']:disabled {
     color: black;
   }

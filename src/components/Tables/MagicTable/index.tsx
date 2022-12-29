@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { SheetContext } from '../../../pages/NewSheet'
+import { SheetContext } from '../../../pages/NewSheet/SheetContextProvider'
 import { FieldContainer, TableContainer } from '../styles'
 
 export function MagicTable() {
