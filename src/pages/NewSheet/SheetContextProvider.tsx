@@ -112,7 +112,6 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
       ),
     )
 
-    console.log(totalAttributesSum)
     setSecondaryAttributesTable((currentState) => {
       const newTable = { ...currentState }
 
@@ -123,6 +122,10 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
       newTable.fields = [
         { fieldKey: 'STUN', fieldValue: modBodyWill * 10 },
         { fieldKey: 'RUN', fieldValue: primaryAttributes.SPD * 3 },
+        {
+          fieldKey: 'LEAP',
+          fieldValue: Math.floor((primaryAttributes.SPD * 3) / 5),
+        },
         { fieldKey: 'STA', fieldValue: modBodyWill * 5 },
         { fieldKey: 'ENC', fieldValue: primaryAttributes.BODY * 10 },
         { fieldKey: 'REC', fieldValue: modBodyWill },
