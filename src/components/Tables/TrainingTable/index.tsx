@@ -23,6 +23,10 @@ export function TrainingTable() {
     updateTrainingField,
     updateSkillField,
     updateMagicField,
+    handleFieldOver,
+    handleFieldDropped,
+    startDraggingField,
+    finishDraggingField,
   } = useContext(SheetContext)
   const { title, fields, minValue, maxValue } = trainingTable
 
@@ -44,12 +48,10 @@ export function TrainingTable() {
 
   return (
     <TableContainer
-      onDrop={(event: any) => console.log(event)}
-      onDragOver={(event: any) => {
-        event.preventDefault()
-        return false
-      }}
-      onDragEnter={(event: any) => console.log(event)}
+      // onDragEnter={handleFieldEntering}
+      onDragOver={handleFieldOver}
+      onDrop={handleFieldDropped}
+      // onDragLeave={handleFieldLeaving}
     >
       <h1>{title}</h1>
 
@@ -66,6 +68,9 @@ export function TrainingTable() {
               max={maxValue}
               value={field.fieldValue}
               onChange={handleTraining}
+              draggable
+              onDragStart={startDraggingField}
+              onDragEnd={finishDraggingField}
             />
           </FieldContainer>
         )

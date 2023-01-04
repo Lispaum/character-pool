@@ -3,8 +3,13 @@ import { SheetContext } from '../../../pages/NewSheet/SheetContextProvider'
 import { FieldContainer, TableContainer } from '../styles'
 
 export function ScrollsTable() {
-  const { scrollsTable, updateTrainingField, updateScrollsField } =
-    useContext(SheetContext)
+  const {
+    scrollsTable,
+    updateTrainingField,
+    updateScrollsField,
+    startDraggingField,
+    finishDraggingField,
+  } = useContext(SheetContext)
 
   const { title, fields } = scrollsTable
 
@@ -20,7 +25,14 @@ export function ScrollsTable() {
       {fields.map((field: string) => {
         return (
           <FieldContainer key={field}>
-            <button type="button" name={field} onClick={handleTrainScroll}>
+            <button
+              draggable
+              onDragStart={startDraggingField}
+              onDragEnd={finishDraggingField}
+              type="button"
+              name={field}
+              onClick={handleTrainScroll}
+            >
               {field}
             </button>
           </FieldContainer>

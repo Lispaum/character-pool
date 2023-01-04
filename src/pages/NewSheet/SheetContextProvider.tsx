@@ -43,9 +43,16 @@ interface SheetContextType {
   updateSkillField: (skillName: string, newValue: number) => void
   updateMagicField: (magicName: string) => void
   updateTrainableSkillsField: (skillName: string) => void
-  updateDraggingField: (element: any) => void
   updateScrollsField: (skillName: string) => void
   updateBackground: (newBackground: string) => void
+  updateDraggingField: (element: any) => void
+  startDraggingField: (event: any) => void
+  dragField: (event: any) => void
+  finishDraggingField: (event: any) => void
+  handleFieldEntering: (event: any) => void
+  handleFieldOver: (event: any) => void
+  handleFieldDropped: (event: any) => void
+  handleFieldLeaving: (event: any) => void
 }
 
 interface PrimaryAttributes {
@@ -71,13 +78,10 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [charName, setCharName] = useState('')
   const [primaryAttributesTable, setPrimaryAttributesTable] =
     useState<KeyValueTableProps>(testPrimaryAttributesTable)
-
   const [secondaryAttributesTable, setSecondaryAttributesTable] =
     useState<KeyValueTableProps>(testSecondaryAttributesTable)
-
   const [trainingTable, setTrainingTable] =
     useState<KeyValueTableProps>(testTrainingTable)
-
   const [skillsTable, setSkillsTable] =
     useState<KeyValueTableProps>(testSkillsTable)
   const [trainableSkillsTable, setTrainableSkillsTable] = useState(
@@ -94,7 +98,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     ),
   )
 
-  // const [draggingField, setDraggingField] = useState<ReactNode>()
+  const [draggingSkill, setDraggingSkill] = useState<string>('')
 
   useEffect(() => {
     const primaryAttributes = {} as PrimaryAttributes
@@ -247,8 +251,53 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   }
 
   function updateDraggingField(element: any) {
-    console.log(element)
+    console.log({ element })
     // setDraggingField(element)
+  }
+
+  function startDraggingField(event: any) {
+    console.log('start-drag', { event })
+    // setDraggingField(element)
+    setDraggingSkill(event.target.name)
+  }
+
+  function dragField(event: any) {
+    // console.log('is-dragging', { element })
+    // setDraggingField(element)
+  }
+
+  function finishDraggingField(event: any) {
+    // console.log('finish-drag', { element })
+    // setDraggingField(element)
+    setDraggingSkill('')
+  }
+
+  // drag zone events
+  function handleFieldEntering(event: any) {
+    console.log('field-entered', { event })
+    // setDraggingField(event)
+  }
+
+  function handleFieldOver(event: Event) {
+    event.preventDefault()
+    console.log('field-over', { event })
+    // setDraggingField(event)
+  }
+
+  function handleFieldLeaving(event: any) {
+    console.log('field-leaved', { event })
+    // setDraggingField(event)
+  }
+
+  function handleFieldDropped(event: any) {
+    event.preventDefault()
+    console.log('dragging', { draggingSkill })
+    console.log('field-dropped', { event })
+    updateTrainingField(draggingSkill, 0)
+
+    if (draggingSkill.includes('Sign')) {
+      updateScrollsField(draggingSkill)
+    } else updateTrainableSkillsField(draggingSkill)
   }
 
   return (
@@ -271,8 +320,15 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         updateTrainableSkillsField,
         updateMagicField,
         updateScrollsField,
-        updateDraggingField,
         updateBackground,
+        updateDraggingField,
+        startDraggingField,
+        dragField,
+        finishDraggingField,
+        handleFieldEntering,
+        handleFieldOver,
+        handleFieldDropped,
+        handleFieldLeaving,
       }}
     >
       {children}

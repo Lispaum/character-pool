@@ -7,7 +7,11 @@ export function TrainableSkillsTable() {
     trainableSkillsTable,
     updateTrainingField,
     updateTrainableSkillsField,
-    updateDraggingField,
+    startDraggingField,
+    dragField,
+    finishDraggingField,
+    handleFieldOver,
+    handleFieldDropped,
   } = useContext(SheetContext)
 
   const { title, fields } = trainableSkillsTable
@@ -18,15 +22,17 @@ export function TrainableSkillsTable() {
   }
 
   return (
-    <TableContainer>
+    <TableContainer onDragOver={handleFieldOver} onDrop={handleFieldDropped}>
       <h1>{title}</h1>
 
       {fields.map((field: string) => {
         return (
           <FieldContainer key={field}>
             <button
-              draggable="true"
-              onDragStart={updateDraggingField}
+              draggable
+              onDragStart={startDraggingField}
+              onDrag={dragField}
+              onDragEnd={finishDraggingField}
               type="button"
               name={field}
               onClick={handleTrainSkill}

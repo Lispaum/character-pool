@@ -33,7 +33,7 @@ export function NewSheet() {
               <SecondaryAttributesTable />
 
               <div className="middleBlock">
-                <img src={characterImage} alt="" />
+                <img src={characterImage} alt="Character's Image" />
                 <TrainingTable />
               </div>
 
