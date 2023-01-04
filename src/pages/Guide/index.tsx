@@ -23,6 +23,9 @@ export function Guide() {
         character forget the skill or magic, and it will go back to the "to be
         trained table".
       </p>
+      <p>
+        You can now also move the skills freely by dragging then, try it out!
+      </p>
     </PageContainer>
   )
 }
