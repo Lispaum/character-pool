@@ -5,13 +5,10 @@ import { FieldContainer, TableContainer } from '../styles'
 export function TrainableSkillsTable() {
   const {
     trainableSkillsTable,
+    draggingField,
     updateTrainingField,
     updateTrainableSkillsField,
-    startDraggingField,
-    dragField,
-    finishDraggingField,
-    handleFieldOver,
-    handleFieldDropped,
+    updateDraggingField,
   } = useContext(SheetContext)
 
   const { title, fields } = trainableSkillsTable
@@ -21,8 +18,16 @@ export function TrainableSkillsTable() {
     updateTrainingField(event.target.name, 0)
   }
 
+  function handleStartDraggingTrainableSkill(event: any) {
+    updateDraggingField(event.target.name, 'skill')
+  }
+
+  function handleEndDraggingTrainableSkill(event: any) {
+    updateTrainableSkillsField(event.target.name)
+  }
+
   return (
-    <TableContainer onDragOver={handleFieldOver} onDrop={handleFieldDropped}>
+    <TableContainer>
       <h1>{title}</h1>
 
       {fields.map((field: string) => {
@@ -30,9 +35,8 @@ export function TrainableSkillsTable() {
           <FieldContainer key={field}>
             <button
               draggable
-              onDragStart={startDraggingField}
-              onDrag={dragField}
-              onDragEnd={finishDraggingField}
+              onDragStart={handleStartDraggingTrainableSkill}
+              onDragEnd={handleEndDraggingTrainableSkill}
               type="button"
               name={field}
               onClick={handleTrainSkill}

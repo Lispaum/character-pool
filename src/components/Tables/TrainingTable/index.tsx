@@ -23,10 +23,8 @@ export function TrainingTable() {
     updateTrainingField,
     updateSkillField,
     updateMagicField,
-    handleFieldOver,
-    handleFieldDropped,
-    startDraggingField,
-    finishDraggingField,
+    draggingField,
+    updateDraggingField,
   } = useContext(SheetContext)
   const { title, fields, minValue, maxValue } = trainingTable
 
@@ -46,18 +44,31 @@ export function TrainingTable() {
     }
   }
 
+  function handleDragTrainingSkill(event: any) {
+    updateDraggingField(event.target.name, 'skill')
+  }
+
+  function handleFieldDropped(event: any) {
+    event.preventDefault()
+    console.log('field-dropped', { event })
+    updateTrainingField(draggingField.skillName, 0)
+  }
+
   return (
     <TableContainer
-      // onDragEnter={handleFieldEntering}
-      onDragOver={handleFieldOver}
+      onDragOver={(event) => event.preventDefault()}
       onDrop={handleFieldDropped}
-      // onDragLeave={handleFieldLeaving}
     >
       <h1>{title}</h1>
 
       {fields.map((field: FieldProps) => {
         return (
-          <FieldContainer key={field.fieldKey}>
+          <FieldContainer
+            key={field.fieldKey}
+            draggable="true"
+            onDragStart={handleDragTrainingSkill}
+            // onDragEnd={finishDraggingField}
+          >
             <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
             <input
               type="number"
@@ -68,9 +79,6 @@ export function TrainingTable() {
               max={maxValue}
               value={field.fieldValue}
               onChange={handleTraining}
-              draggable
-              onDragStart={startDraggingField}
-              onDragEnd={finishDraggingField}
             />
           </FieldContainer>
         )

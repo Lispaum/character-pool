@@ -7,8 +7,7 @@ export function ScrollsTable() {
     scrollsTable,
     updateTrainingField,
     updateScrollsField,
-    startDraggingField,
-    finishDraggingField,
+    updateDraggingField,
   } = useContext(SheetContext)
 
   const { title, fields } = scrollsTable
@@ -16,6 +15,14 @@ export function ScrollsTable() {
   function handleTrainScroll(event: any) {
     updateScrollsField(event.target.name)
     updateTrainingField(event.target.name, 0)
+  }
+
+  function handleStartDraggingTrainableSkill(event: any) {
+    updateDraggingField(event.target.name, 'skill')
+  }
+
+  function handleEndDraggingTrainableSkill(event: any) {
+    updateScrollsField(event.target.name)
   }
 
   return (
@@ -27,8 +34,8 @@ export function ScrollsTable() {
           <FieldContainer key={field}>
             <button
               draggable
-              onDragStart={startDraggingField}
-              onDragEnd={finishDraggingField}
+              onDragStart={handleStartDraggingTrainableSkill}
+              onDragEnd={handleEndDraggingTrainableSkill}
               type="button"
               name={field}
               onClick={handleTrainScroll}
