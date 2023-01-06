@@ -42,7 +42,7 @@ interface SheetContextType {
   magicTable: ListTableProps
   scrollsTable: ListTableProps
   background: string
-  draggingField: DraggingField | undefined
+  draggingField: DraggingField
   updateCharName: (newName: string) => void
   updatePrimaryAttributeField: (attributeName: string, newValue: number) => void
   updateTrainingField: (skillName: string, newValue: number) => void
@@ -97,7 +97,10 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     ),
   )
 
-  const [draggingField, setDraggingField] = useState<DraggingField>()
+  const [draggingField, setDraggingField] = useState<DraggingField>({
+    skillName: '',
+    skillType: '',
+  })
 
   useEffect(() => {
     const primaryAttributes = {} as PrimaryAttributes

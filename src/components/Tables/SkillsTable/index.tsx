@@ -21,9 +21,8 @@ export function SkillsTable() {
     skillsTable,
     updateSkillField,
     updateTrainableSkillsField,
-    handleFieldOver,
     updateTrainingField,
-    draggingSkill,
+    draggingField,
   } = useContext(SheetContext)
 
   const { title, fields, minValue, maxValue } = skillsTable
@@ -39,12 +38,14 @@ export function SkillsTable() {
   function handleFieldDropped(event: any) {
     event.preventDefault()
     console.log('field-dropped', { event })
-    updateTrainingField(draggingSkill, 4)
-    updateSkillField(draggingSkill, 1)
+    // updateTrainingField(draggingField, 4)
+    // updateSkillField(draggingField, 1)
   }
 
   return (
-    <TableContainer onDragOver={handleFieldOver} onDrop={handleFieldDropped}>
+    <TableContainer
+    // onDragOver={handleFieldOver} onDrop={handleFieldDropped}
+    >
       <h1>{title}</h1>
 
       {fields.map((field: FieldProps) => {

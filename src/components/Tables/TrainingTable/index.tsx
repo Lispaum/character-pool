@@ -51,7 +51,7 @@ export function TrainingTable() {
   function handleFieldDropped(event: any) {
     event.preventDefault()
     console.log('field-dropped', { event })
-    updateTrainingField(draggingField.skillName, 0)
+    updateTrainingField(draggingField?.skillName, 0)
   }
 
   return (
