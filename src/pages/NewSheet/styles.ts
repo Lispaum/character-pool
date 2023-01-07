@@ -19,6 +19,14 @@ export const SheetBodyContainer = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 
+  .attributesBlock,
+  .inventoryBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+  }
+
   img {
     width: 100%;
     padding: 1rem;

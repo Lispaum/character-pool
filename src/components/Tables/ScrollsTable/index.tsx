@@ -12,17 +12,13 @@ export function ScrollsTable() {
 
   const { title, fields } = scrollsTable
 
-  function handleTrainScroll(event: any) {
+  function handleClickOnScroll(event: any) {
     updateScrollsField(event.target.name)
     updateTrainingField(event.target.name, 0)
   }
 
   function handleStartDraggingTrainableSkill(event: any) {
-    updateDraggingField(event.target.name, 'skill')
-  }
-
-  function handleEndDraggingTrainableSkill(event: any) {
-    updateScrollsField(event.target.name)
+    updateDraggingField(event.target.name, 'scrolls')
   }
 
   return (
@@ -35,10 +31,9 @@ export function ScrollsTable() {
             <button
               draggable
               onDragStart={handleStartDraggingTrainableSkill}
-              onDragEnd={handleEndDraggingTrainableSkill}
               type="button"
               name={field}
-              onClick={handleTrainScroll}
+              onClick={handleClickOnScroll}
             >
               {field}
             </button>

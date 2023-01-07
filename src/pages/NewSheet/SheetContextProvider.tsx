@@ -27,8 +27,8 @@ interface ListTableProps {
 }
 
 interface DraggingField {
-  skillName: string
-  skillType: string
+  fieldName: string
+  fieldSource: string
 }
 
 interface SheetContextType {
@@ -43,6 +43,10 @@ interface SheetContextType {
   scrollsTable: ListTableProps
   background: string
   draggingField: DraggingField
+  draggingItem: DraggingField
+  equippedItems: string[]
+  bagItems: string[]
+  homeChestItems: string[]
   updateCharName: (newName: string) => void
   updatePrimaryAttributeField: (attributeName: string, newValue: number) => void
   updateTrainingField: (skillName: string, newValue: number) => void
@@ -51,7 +55,11 @@ interface SheetContextType {
   updateTrainableSkillsField: (skillName: string) => void
   updateScrollsField: (skillName: string) => void
   updateBackground: (newBackground: string) => void
-  updateDraggingField: (skillName: string, skillType: string) => void
+  updateDraggingField: (skillName: string, skillSource: string) => void
+  updateDraggingItem: (itemName: string, itemSource: string) => void
+  updateEquippedItems: (itemName: string) => void
+  updateBagItems: (itemName: string) => void
+  updateHomeChestItems: (itemName: string) => void
 }
 
 interface PrimaryAttributes {
@@ -98,9 +106,22 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   )
 
   const [draggingField, setDraggingField] = useState<DraggingField>({
-    skillName: '',
-    skillType: '',
+    fieldName: '',
+    fieldSource: '',
   })
+  const [draggingItem, setDraggingItem] = useState<DraggingField>({
+    fieldName: '',
+    fieldSource: '',
+  })
+
+  const [equippedItems, setEquippedItems] = useState<string[]>([
+    'Silver Sword',
+    'Meteorite Sword',
+  ])
+  const [bagItems, setbagItems] = useState<string[]>(["Yennefer's Meddalion"])
+  const [homeChestItems, setHomeChestItems] = useState<string[]>([
+    "Ciri's Sword",
+  ])
 
   useEffect(() => {
     const primaryAttributes = {} as PrimaryAttributes
@@ -252,8 +273,47 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     setBackground(newBackground)
   }
 
-  function updateDraggingField(skillName: string, skillType: string) {
-    setDraggingField({ skillName, skillType })
+  function updateDraggingField(fieldName: string, fieldSource: string) {
+    setDraggingField({ fieldName, fieldSource })
+  }
+
+  function updateDraggingItem(fieldName: string, fieldSource: string) {
+    setDraggingItem({ fieldName, fieldSource })
+  }
+
+  function updateEquippedItems(itemName: string) {
+    let newList = equippedItems
+
+    if (newList.includes(itemName)) {
+      newList = newList.filter((item) => item !== itemName)
+    } else {
+      newList.push(itemName)
+    }
+
+    setEquippedItems(newList)
+  }
+  function updateBagItems(itemName: string) {
+    let newList = bagItems
+
+    if (newList.includes(itemName)) {
+      newList = newList.filter((item) => item !== itemName)
+    } else {
+      newList.push(itemName)
+    }
+
+    setbagItems(newList)
+  }
+
+  function updateHomeChestItems(itemName: string) {
+    let newList = homeChestItems
+
+    if (newList.includes(itemName)) {
+      newList = newList.filter((item) => item !== itemName)
+    } else {
+      newList.push(itemName)
+    }
+
+    setHomeChestItems(newList)
   }
 
   return (
@@ -271,6 +331,10 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         scrollsTable,
         background,
         draggingField,
+        draggingItem,
+        equippedItems,
+        bagItems,
+        homeChestItems,
         updatePrimaryAttributeField,
         updateTrainingField,
         updateSkillField,
@@ -279,6 +343,10 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         updateScrollsField,
         updateBackground,
         updateDraggingField,
+        updateDraggingItem,
+        updateEquippedItems,
+        updateBagItems,
+        updateHomeChestItems,
       }}
     >
       {children}

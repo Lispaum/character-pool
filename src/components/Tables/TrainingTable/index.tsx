@@ -7,24 +7,15 @@ interface FieldProps {
   fieldValue: number
 }
 
-// interface TableProps {
-//   title: string
-//   fields: FieldProps[]
-//   minValue: number
-//   maxValue: number
-//   updateTrainingField: (skillName: string, newValue: number) => void
-//   updateSkillField: (skillName: string, newValue: number) => void
-//   updateMagicField: (magicName: string) => void
-// }
-
 export function TrainingTable() {
   const {
     trainingTable,
     updateTrainingField,
     updateSkillField,
     updateMagicField,
+    updateTrainableSkillsField,
+    updateScrollsField,
     draggingField,
-    updateDraggingField,
   } = useContext(SheetContext)
   const { title, fields, minValue, maxValue } = trainingTable
 
@@ -44,14 +35,16 @@ export function TrainingTable() {
     }
   }
 
-  function handleDragTrainingSkill(event: any) {
-    updateDraggingField(event.target.name, 'skill')
-  }
-
   function handleFieldDropped(event: any) {
     event.preventDefault()
-    console.log('field-dropped', { event })
-    updateTrainingField(draggingField?.skillName, 0)
+    updateTrainingField(draggingField?.fieldName, 0)
+
+    const source = draggingField.fieldSource
+    if (source === 'trainable-skills') {
+      updateTrainableSkillsField(draggingField.fieldName)
+    } else if (source === 'scrolls') {
+      updateScrollsField(draggingField.fieldName)
+    }
   }
 
   return (
@@ -63,12 +56,7 @@ export function TrainingTable() {
 
       {fields.map((field: FieldProps) => {
         return (
-          <FieldContainer
-            key={field.fieldKey}
-            draggable="true"
-            onDragStart={handleDragTrainingSkill}
-            // onDragEnd={finishDraggingField}
-          >
+          <FieldContainer key={field.fieldKey}>
             <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
             <input
               type="number"

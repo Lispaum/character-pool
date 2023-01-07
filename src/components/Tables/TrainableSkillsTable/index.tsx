@@ -5,7 +5,6 @@ import { FieldContainer, TableContainer } from '../styles'
 export function TrainableSkillsTable() {
   const {
     trainableSkillsTable,
-    draggingField,
     updateTrainingField,
     updateTrainableSkillsField,
     updateDraggingField,
@@ -13,17 +12,13 @@ export function TrainableSkillsTable() {
 
   const { title, fields } = trainableSkillsTable
 
-  function handleTrainSkill(event: any) {
+  function handleClickOnSkill(event: any) {
     updateTrainableSkillsField(event.target.name)
     updateTrainingField(event.target.name, 0)
   }
 
   function handleStartDraggingTrainableSkill(event: any) {
-    updateDraggingField(event.target.name, 'skill')
-  }
-
-  function handleEndDraggingTrainableSkill(event: any) {
-    updateTrainableSkillsField(event.target.name)
+    updateDraggingField(event.target.name, 'trainable-skills')
   }
 
   return (
@@ -36,10 +31,9 @@ export function TrainableSkillsTable() {
             <button
               draggable
               onDragStart={handleStartDraggingTrainableSkill}
-              onDragEnd={handleEndDraggingTrainableSkill}
               type="button"
               name={field}
-              onClick={handleTrainSkill}
+              onClick={handleClickOnSkill}
             >
               {field}
             </button>

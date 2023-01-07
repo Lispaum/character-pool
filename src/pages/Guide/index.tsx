@@ -24,7 +24,12 @@ export function Guide() {
         trained table".
       </p>
       <p>
-        You can now also move the skills freely by dragging then, try it out!
+        You can now also move the skills and scrolls to start training them by
+        dragging then, try it out!
+      </p>
+      <p>
+        You can manage your character's inventory by dragging items between the
+        boxes Home Chest, Bag and Equipped
       </p>
     </PageContainer>
   )

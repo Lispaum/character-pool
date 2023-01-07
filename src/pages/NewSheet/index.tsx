@@ -17,6 +17,9 @@ import { MagicTable } from '../../components/Tables/MagicTable'
 import { SheetContextProvider } from './SheetContextProvider'
 import { Background } from '../../components/Background'
 import { CharacterName } from '../../components/CharacterName'
+import { Bag } from '../../components/Inventory/Bag'
+import { Equipped } from '../../components/Inventory/Equipped'
+import { HomeChest } from '../../components/Inventory/HomeChest'
 
 export function NewSheet() {
   return (
@@ -28,12 +31,21 @@ export function NewSheet() {
               <CharacterName />
             </SheetHeaderContainer>
             <SheetBodyContainer>
-              <TotalSum />
-              <PrimaryAttributesTable />
-              <SecondaryAttributesTable />
+              <div className="leftBlock">
+                <div className="attributesBlock">
+                  <TotalSum />
+                  <PrimaryAttributesTable />
+                  <SecondaryAttributesTable />
+                </div>
+              </div>
 
               <div className="middleBlock">
                 <img src={characterImage} alt="Character's Image" />
+                <div className="inventoryBlock">
+                  <HomeChest />
+                  <Bag />
+                  <Equipped />
+                </div>
                 <TrainingTable />
               </div>
 
