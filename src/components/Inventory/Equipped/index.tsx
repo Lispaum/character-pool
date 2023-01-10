@@ -10,6 +10,7 @@ export function Equipped() {
     updateBagItems,
     updateEquippedItems,
     updateHomeChestItems,
+    updateNewItem,
   } = useContext(SheetContext)
 
   function handleStartDraggingItem(event: any) {
@@ -18,13 +19,18 @@ export function Equipped() {
 
   function handleFieldDropped(event: any) {
     event.preventDefault()
+    const source = draggingItem.fieldSource
+
+    if (source === 'equipped') return
+
     updateEquippedItems(draggingItem?.fieldName)
 
-    const source = draggingItem.fieldSource
     if (source === 'bag') {
       updateBagItems(draggingItem.fieldName)
     } else if (source === 'home-chest') {
       updateHomeChestItems(draggingItem.fieldName)
+    } else if (source === 'new-item') {
+      updateNewItem('')
     }
   }
 

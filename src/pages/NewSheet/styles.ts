@@ -19,6 +19,10 @@ export const SheetBodyContainer = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 
+  .middleBlock {
+    width: 65vh;
+  }
+
   .attributesBlock,
   .inventoryBlock {
     display: flex;

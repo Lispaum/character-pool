@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const BoxContainer = styled.div`
   border: 1px solid black;
   margin: 0.25rem;
+  min-width: 8rem;
+  width: 100%;
 
   h1 {
     font-size: 1.4rem;
@@ -24,7 +26,8 @@ export const FieldContainer = styled.div`
     background-color: ${(props) => props.theme['fill-B'] ?? ''};
   }
 
-  div {
+  div,
+  input {
     width: 100%;
     margin: 0.2rem 0.5rem;
     background-color: transparent;

@@ -47,6 +47,7 @@ interface SheetContextType {
   equippedItems: string[]
   bagItems: string[]
   homeChestItems: string[]
+  newItem: string
   updateCharName: (newName: string) => void
   updatePrimaryAttributeField: (attributeName: string, newValue: number) => void
   updateTrainingField: (skillName: string, newValue: number) => void
@@ -60,6 +61,7 @@ interface SheetContextType {
   updateEquippedItems: (itemName: string) => void
   updateBagItems: (itemName: string) => void
   updateHomeChestItems: (itemName: string) => void
+  updateNewItem: (itemName: string) => void
 }
 
 interface PrimaryAttributes {
@@ -122,6 +124,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [homeChestItems, setHomeChestItems] = useState<string[]>([
     "Ciri's Sword",
   ])
+  const [newItem, setNewItem] = useState<string>('')
 
   useEffect(() => {
     const primaryAttributes = {} as PrimaryAttributes
@@ -316,6 +319,10 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     setHomeChestItems(newList)
   }
 
+  function updateNewItem(itemName: string) {
+    setNewItem(itemName)
+  }
+
   return (
     <SheetContext.Provider
       value={{
@@ -335,6 +342,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         equippedItems,
         bagItems,
         homeChestItems,
+        newItem,
         updatePrimaryAttributeField,
         updateTrainingField,
         updateSkillField,
@@ -347,6 +355,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         updateEquippedItems,
         updateBagItems,
         updateHomeChestItems,
+        updateNewItem,
       }}
     >
       {children}

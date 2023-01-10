@@ -20,6 +20,7 @@ import { CharacterName } from '../../components/CharacterName'
 import { Bag } from '../../components/Inventory/Bag'
 import { Equipped } from '../../components/Inventory/Equipped'
 import { HomeChest } from '../../components/Inventory/HomeChest'
+import { NewItem } from '../../components/Inventory/NewItem'
 
 export function NewSheet() {
   return (
@@ -31,22 +32,20 @@ export function NewSheet() {
               <CharacterName />
             </SheetHeaderContainer>
             <SheetBodyContainer>
-              <div className="leftBlock">
-                <div className="attributesBlock">
-                  <TotalSum />
-                  <PrimaryAttributesTable />
-                  <SecondaryAttributesTable />
-                </div>
+              <div className="attributesBlock">
+                <TotalSum />
+                <PrimaryAttributesTable />
+                <SecondaryAttributesTable />
               </div>
 
               <div className="middleBlock">
                 <img src={characterImage} alt="Character's Image" />
                 <div className="inventoryBlock">
+                  <NewItem />
                   <HomeChest />
                   <Bag />
                   <Equipped />
                 </div>
-                <TrainingTable />
               </div>
 
               <div className="skillsBlock">
@@ -58,6 +57,7 @@ export function NewSheet() {
                 <MagicTable />
                 <ScrollsTable />
               </div>
+              <TrainingTable />
 
               <Background />
             </SheetBodyContainer>
