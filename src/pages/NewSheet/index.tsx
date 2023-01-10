@@ -39,6 +39,7 @@ export function NewSheet() {
               </div>
 
               <div className="middleBlock">
+                <Background />
                 <img src={characterImage} alt="Character's Image" />
                 <div className="inventoryBlock">
                   <NewItem />
@@ -58,8 +59,6 @@ export function NewSheet() {
                 <ScrollsTable />
               </div>
               <TrainingTable />
-
-              <Background />
             </SheetBodyContainer>
           </fieldset>
         </form>

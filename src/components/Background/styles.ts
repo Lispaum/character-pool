@@ -1,26 +1,76 @@
 import styled from 'styled-components'
 
 export const BackgroundContainer = styled.div`
-  width: 23%;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+
   margin: 0rem 2rem;
 
   font-size: 1rem;
-  height: 50vh;
 
-  textarea {
-    height: 50vh;
-    background-color: transparent;
-    text-align: justify;
-    font-size: inherit;
-    font-family: inherit;
+  #backgroundPopup {
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
     width: 100%;
-    border: none;
-  }
+    top: 150%;
 
-  div {
-    text-align: end;
-  }
+    margin-top: 1em;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-right: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
 
+    &.show {
+      visibility: visible;
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s;
+
+      padding: 1em 2em;
+      border-radius: 6px;
+      text-align: justify;
+      background-color: ${(props) => props.theme['fill-B'] ?? ''};
+    }
+
+    @-webkit-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    textarea {
+      height: 50vh;
+      background-color: transparent;
+      text-align: justify;
+      font-size: inherit;
+      font-family: inherit;
+      width: 100%;
+      border: none;
+    }
+
+    div {
+      text-align: end;
+    }
+  }
   @media only screen and (max-width: 600px) {
     width: 100%;
     padding-top: 1rem;
