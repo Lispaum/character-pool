@@ -38,6 +38,17 @@ export const FieldContainer = styled.div`
     text-align: left;
   }
 
+  span {
+    visibility: hidden;
+    margin: 0.2rem 0.5rem;
+    font-weight: bold;
+    font-family: monospace;
+  }
+
+  :hover span {
+    visibility: visible;
+  }
+
   div {
     margin: 0.2rem 0.2rem;
   }

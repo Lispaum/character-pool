@@ -12,15 +12,14 @@ export function Background() {
   }
 
   return (
-    <BackgroundContainer onClick={showBackground}>
-      Background
+    <BackgroundContainer>
+      <span onClick={showBackground}>Background</span>
       <div id="backgroundPopup">
         <textarea
           placeholder="Character's Background"
           value={background}
           onChange={(event) => updateBackground(event.target.value)}
         />
-        <div>– Rodolf Kazmer</div>
       </div>
     </BackgroundContainer>
   )

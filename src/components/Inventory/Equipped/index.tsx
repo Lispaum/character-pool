@@ -1,21 +1,17 @@
 import { useContext } from 'react'
 import { SheetContext } from '../../../pages/NewSheet/SheetContextProvider'
-import { BoxContainer, FieldContainer } from '../styles'
+import { ItemField } from '../ItemField'
+import { BoxContainer } from '../styles'
 
 export function Equipped() {
   const {
     equippedItems,
     draggingItem,
-    updateDraggingItem,
     updateBagItems,
     updateEquippedItems,
     updateHomeChestItems,
     updateNewItem,
   } = useContext(SheetContext)
-
-  function handleStartDraggingItem(event: any) {
-    updateDraggingItem(event.target.title, 'equipped')
-  }
 
   function handleFieldDropped(event: any) {
     event.preventDefault()
@@ -43,11 +39,12 @@ export function Equipped() {
 
       {equippedItems.map((field: string) => {
         return (
-          <FieldContainer key={field}>
-            <div draggable onDragStart={handleStartDraggingItem} title={field}>
-              {field}
-            </div>
-          </FieldContainer>
+          <ItemField
+            key={field}
+            itemName={field}
+            boxName="equipped"
+            updateBox={updateEquippedItems}
+          />
         )
       })}
     </BoxContainer>

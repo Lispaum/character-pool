@@ -33,7 +33,7 @@ export const BackgroundContainer = styled.div`
       -webkit-animation: fadeIn 1s;
       animation: fadeIn 1s;
 
-      padding: 1em 2em;
+      padding: 2em;
       border-radius: 6px;
       text-align: justify;
       background-color: ${(props) => props.theme['fill-B'] ?? ''};
