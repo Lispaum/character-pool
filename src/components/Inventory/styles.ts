@@ -3,11 +3,10 @@ import styled from 'styled-components'
 export const BoxContainer = styled.div`
   border: 1px solid black;
   margin: 0.25rem;
-  min-width: 8rem;
-  width: 100%;
+  width: 9rem;
 
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-align: center;
     background-color: ${(props) => props.theme['fill-B'] ?? ''};
     padding: 0 0.5rem;
@@ -36,6 +35,13 @@ export const FieldContainer = styled.div`
     font-size: inherit;
     font-family: inherit;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :hover div {
+    white-space: unset;
   }
 
   span {

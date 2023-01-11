@@ -21,13 +21,15 @@ export const SheetBodyContainer = styled.div`
 
   .middleBlock {
     width: 65vh;
+    max-width: 65vh;
   }
 
   .attributesBlock,
   .inventoryBlock {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: center;
   }
 

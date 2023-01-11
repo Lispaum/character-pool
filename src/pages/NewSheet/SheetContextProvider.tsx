@@ -120,7 +120,9 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     'Silver Sword',
     'Meteorite Sword',
   ])
-  const [bagItems, setbagItems] = useState<string[]>(["Yennefer's Meddalion"])
+  const [bagItems, setbagItems] = useState<string[]>([
+    "Yennefer's Obsidian Medallion",
+  ])
   const [homeChestItems, setHomeChestItems] = useState<string[]>([
     "Ciri's Sword",
   ])
