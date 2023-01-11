@@ -29,7 +29,9 @@ export function Guide() {
       </p>
       <p>
         You can manage your character's inventory by dragging items between the
-        boxes Home Chest, Bag and Equipped
+        boxes Home Chest, Bag and Equipped. Create items by entering its name on
+        the New Item Box and then dragging it to the its box. Delete items by
+        hovering it then holding down left mouse button on it.
       </p>
     </PageContainer>
   )
