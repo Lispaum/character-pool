@@ -17,13 +17,8 @@ interface FieldProps {
 // }
 
 export function SkillsTable() {
-  const {
-    skillsTable,
-    updateSkillField,
-    updateTrainableSkillsField,
-    updateTrainingField,
-    draggingField,
-  } = useContext(SheetContext)
+  const { skillsTable, updateSkillField, updateTrainableSkillsField } =
+    useContext(SheetContext)
 
   const { title, fields, minValue, maxValue } = skillsTable
 
@@ -35,17 +30,8 @@ export function SkillsTable() {
     }
   }
 
-  function handleFieldDropped(event: any) {
-    event.preventDefault()
-    console.log('field-dropped', { event })
-    // updateTrainingField(draggingField, 4)
-    // updateSkillField(draggingField, 1)
-  }
-
   return (
-    <TableContainer
-    // onDragOver={handleFieldOver} onDrop={handleFieldDropped}
-    >
+    <TableContainer>
       <h1>{title}</h1>
 
       {fields.map((field: FieldProps) => {

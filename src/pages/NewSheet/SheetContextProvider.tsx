@@ -325,6 +325,17 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     setNewItem(itemName)
   }
 
+  async function loadSheetData() {
+    const response = await fetch('http:localhost:3434/character_sheets')
+    const data = await response.json()
+
+    console.log(data)
+  }
+
+  useEffect(() => {
+    loadSheetData()
+  }, [])
+
   return (
     <SheetContext.Provider
       value={{
