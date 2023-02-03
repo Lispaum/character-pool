@@ -326,7 +326,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   }
 
   async function loadSheetData() {
-    const response = await fetch('http:localhost:3434/character_sheets')
+    const response = await fetch('http://localhost:3434/character_sheets')
     const data = await response.json()
 
     console.log(data)
