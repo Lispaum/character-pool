@@ -2,11 +2,6 @@ import { useContext } from 'react'
 import { SheetContext } from '../../../pages/NewSheet/SheetContextProvider'
 import { FieldContainer, TableContainer } from '../styles'
 
-interface FieldProps {
-  fieldKey: string
-  fieldValue: number
-}
-
 export function PrimaryAttributesTable() {
   const { primaryAttributesTable, updatePrimaryAttributeField } =
     useContext(SheetContext)
@@ -17,22 +12,24 @@ export function PrimaryAttributesTable() {
     updatePrimaryAttributeField(event.target.name, Number(event.target.value))
   }
 
+  const attributesKeys = Object.keys(fields)
+
   return (
     <TableContainer>
       <h1>{title}</h1>
 
-      {fields.map((field: FieldProps) => {
+      {attributesKeys.map((attributeKey: string) => {
         return (
-          <FieldContainer key={field.fieldKey}>
-            <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
+          <FieldContainer key={attributeKey}>
+            <label htmlFor={attributeKey}>{attributeKey}</label>
             <input
               type="number"
-              id={field.fieldKey}
-              name={field.fieldKey}
+              id={attributeKey}
+              name={attributeKey}
               placeholder="-"
               min={minValue}
               max={maxValue}
-              value={field.fieldValue}
+              value={fields[attributeKey]}
               onChange={handleUpdatePrimaryAttributeField}
             />
           </FieldContainer>

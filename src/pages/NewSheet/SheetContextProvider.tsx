@@ -15,12 +15,22 @@ interface KeyValuePair {
   fieldValue: number
 }
 
+type KeyValueTableFields = { [key: string]: number }
+
 interface KeyValueTableProps {
   title: string
   fields: KeyValuePair[]
   minValue: number
   maxValue: number
 }
+
+interface PrimaryAttributesTableProps {
+  title: string
+  fields: KeyValueTableFields
+  minValue: number
+  maxValue: number
+}
+
 interface ListTableProps {
   title: string
   fields: string[]
@@ -34,7 +44,7 @@ interface DraggingField {
 interface SheetContextType {
   charName: string
   totalAttributesSum: number
-  primaryAttributesTable: KeyValueTableProps
+  primaryAttributesTable: PrimaryAttributesTableProps
   secondaryAttributesTable: KeyValueTableProps
   trainingTable: KeyValueTableProps
   skillsTable: KeyValueTableProps
@@ -64,16 +74,16 @@ interface SheetContextType {
   updateNewItem: (itemName: string) => void
 }
 
-interface PrimaryAttributes {
-  INT: number
-  REF: number
-  DEX: number
-  BODY: number
-  SPD: number
-  EMP: number
-  CRA: number
-  WILL: number
-}
+// interface PrimaryAttributes {
+//   INT: number
+//   REF: number
+//   DEX: number
+//   BODY: number
+//   SPD: number
+//   EMP: number
+//   CRA: number
+//   WILL: number
+// }
 
 export const SheetContext = createContext<SheetContextType>(
   {} as SheetContextType,
@@ -86,7 +96,7 @@ interface SheetContextProviderProps {
 export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [charName, setCharName] = useState('')
   const [primaryAttributesTable, setPrimaryAttributesTable] =
-    useState<KeyValueTableProps>(testPrimaryAttributesTable)
+    useState<PrimaryAttributesTableProps>(testPrimaryAttributesTable)
   const [secondaryAttributesTable, setSecondaryAttributesTable] =
     useState<KeyValueTableProps>(testSecondaryAttributesTable)
   const [trainingTable, setTrainingTable] =
@@ -100,12 +110,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [scrollsTable, setScrollsTable] = useState(testScrollsTable)
   const [background, setBackground] = useState(testBackground)
 
-  const [totalAttributesSum, setTotalAttributesSum] = useState(
-    primaryAttributesTable.fields.reduce(
-      (acc, element) => acc + element.fieldValue,
-      0,
-    ),
-  )
+  const [totalAttributesSum, setTotalAttributesSum] = useState<number>(0)
 
   const [draggingField, setDraggingField] = useState<DraggingField>({
     fieldName: '',
@@ -129,23 +134,17 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [newItem, setNewItem] = useState<string>('')
 
   useEffect(() => {
-    const primaryAttributes = {} as PrimaryAttributes
-    primaryAttributesTable.fields.forEach((field) => {
-      // console.log(typeof primaryAttributes)
-      // TODO: understand this thing lol
-      primaryAttributes[field.fieldKey as keyof typeof primaryAttributes] =
-        field.fieldValue
-    })
-
     setTotalAttributesSum(
-      primaryAttributesTable.fields.reduce(
-        (acc, element) => acc + element.fieldValue,
+      Object.values(primaryAttributesTable.fields).reduce(
+        (acc, currentValue) => acc + currentValue,
         0,
       ),
     )
 
     setSecondaryAttributesTable((currentState) => {
       const newTable = { ...currentState }
+
+      const primaryAttributes = primaryAttributesTable.fields
 
       const modBodyWill = Math.floor(
         (primaryAttributes.BODY + primaryAttributes.WILL) / 2,
@@ -179,9 +178,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   ) {
     const newTable = { ...primaryAttributesTable }
 
-    newTable.fields.forEach((field) => {
-      if (field.fieldKey === attributeName) field.fieldValue = newValue
-    })
+    newTable.fields[attributeName] = newValue
 
     setPrimaryAttributesTable(newTable)
   }
