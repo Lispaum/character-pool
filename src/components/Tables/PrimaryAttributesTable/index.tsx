@@ -12,13 +12,13 @@ export function PrimaryAttributesTable() {
     updatePrimaryAttributeField(event.target.name, Number(event.target.value))
   }
 
-  const attributesKeys = Object.keys(fields)
+  const primaryAttributes = Object.entries(fields)
 
   return (
     <TableContainer>
       <h1>{title}</h1>
 
-      {attributesKeys.map((attributeKey: string) => {
+      {primaryAttributes.map(([attributeKey, attributeValue]) => {
         return (
           <FieldContainer key={attributeKey}>
             <label htmlFor={attributeKey}>{attributeKey}</label>
@@ -29,7 +29,7 @@ export function PrimaryAttributesTable() {
               placeholder="-"
               min={minValue}
               max={maxValue}
-              value={fields[attributeKey]}
+              value={attributeValue}
               onChange={handleUpdatePrimaryAttributeField}
             />
           </FieldContainer>
