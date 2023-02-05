@@ -2,31 +2,28 @@ import { useContext } from 'react'
 import { SheetContext } from '../../../pages/NewSheet/SheetContextProvider'
 import { FieldContainer, TableContainer } from '../styles'
 
-interface FieldProps {
-  fieldKey: string
-  fieldValue: number
-}
-
 export function SecondaryAttributesTable() {
   const { secondaryAttributesTable } = useContext(SheetContext)
 
   const { title, fields } = secondaryAttributesTable
 
+  const secondaryAttributes = Object.entries(fields)
+
   return (
     <TableContainer>
       <h1>{title}</h1>
 
-      {fields.map((field: FieldProps) => {
+      {secondaryAttributes.map(([attributeKey, attributeValue]) => {
         return (
-          <FieldContainer key={field.fieldKey}>
-            <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
+          <FieldContainer key={attributeKey}>
+            <label htmlFor={attributeKey}>{attributeKey}</label>
             <input
               readOnly
               type="number"
-              id={field.fieldKey}
-              name={field.fieldKey}
+              id={attributeKey}
+              name={attributeKey}
               placeholder="-"
-              value={field.fieldValue}
+              value={attributeValue}
             />
           </FieldContainer>
         )

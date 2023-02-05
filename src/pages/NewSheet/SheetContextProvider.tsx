@@ -4,7 +4,6 @@ import {
   testSkillsTable,
   testMagicTable,
   testBackground,
-  testSecondaryAttributesTable,
   testScrollsTable,
   testTrainableSkillsTable,
   testTrainingTable,
@@ -24,7 +23,7 @@ interface KeyValueTableProps {
   maxValue: number
 }
 
-interface PrimaryAttributesTableProps {
+interface KeyValueAttributesTableProps {
   title: string
   fields: KeyValueTableFields
   minValue: number
@@ -44,8 +43,8 @@ interface DraggingField {
 interface SheetContextType {
   charName: string
   totalAttributesSum: number
-  primaryAttributesTable: PrimaryAttributesTableProps
-  secondaryAttributesTable: KeyValueTableProps
+  primaryAttributesTable: KeyValueAttributesTableProps
+  secondaryAttributesTable: KeyValueAttributesTableProps
   trainingTable: KeyValueTableProps
   skillsTable: KeyValueTableProps
   trainableSkillsTable: ListTableProps
@@ -96,9 +95,14 @@ interface SheetContextProviderProps {
 export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [charName, setCharName] = useState('')
   const [primaryAttributesTable, setPrimaryAttributesTable] =
-    useState<PrimaryAttributesTableProps>(testPrimaryAttributesTable)
+    useState<KeyValueAttributesTableProps>(testPrimaryAttributesTable)
   const [secondaryAttributesTable, setSecondaryAttributesTable] =
-    useState<KeyValueTableProps>(testSecondaryAttributesTable)
+    useState<KeyValueAttributesTableProps>({
+      title: '',
+      minValue: 1,
+      maxValue: 100,
+      fields: {},
+    })
   const [trainingTable, setTrainingTable] =
     useState<KeyValueTableProps>(testTrainingTable)
   const [skillsTable, setSkillsTable] =
@@ -150,19 +154,16 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         (primaryAttributes.BODY + primaryAttributes.WILL) / 2,
       )
 
-      newTable.fields = [
-        { fieldKey: 'STUN', fieldValue: modBodyWill * 10 },
-        { fieldKey: 'RUN', fieldValue: primaryAttributes.SPD * 3 },
-        {
-          fieldKey: 'LEAP',
-          fieldValue: Math.floor((primaryAttributes.SPD * 3) / 5),
-        },
-        { fieldKey: 'STA', fieldValue: modBodyWill * 5 },
-        { fieldKey: 'ENC', fieldValue: primaryAttributes.BODY * 10 },
-        { fieldKey: 'REC', fieldValue: modBodyWill },
-        { fieldKey: 'HP', fieldValue: modBodyWill * 5 },
-        { fieldKey: 'VIGOR', fieldValue: 7 },
-      ]
+      newTable.fields = {
+        STUN: modBodyWill * 10,
+        RUN: primaryAttributes.SPD * 3,
+        LEAP: Math.floor((primaryAttributes.SPD * 3) / 5),
+        STA: modBodyWill * 5,
+        ENC: primaryAttributes.BODY * 10,
+        REC: modBodyWill,
+        HP: modBodyWill * 5,
+        VIGOR: 7,
+      }
 
       return { ...currentState, fields: newTable.fields }
     })
