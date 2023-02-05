@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const TableContainer = styled.div`
   border: 1px solid black;
+  border-radius: 5px;
+  padding: 1px;
   margin: 0.25rem;
 
   h1 {
@@ -9,6 +11,10 @@ export const TableContainer = styled.div`
     text-align: center;
     background-color: ${(props) => props.theme['fill-B'] ?? ''};
     padding: 0 0.5rem;
+  }
+  *:first-child,
+  *:last-child {
+    border-radius: inherit;
   }
 `
 

@@ -9,15 +9,13 @@ export const HeaderContainer = styled.header`
 
   background-color: ${(props) => props.theme.headerColor};
 
-  max-height: 2.5rem;
-
   @media only screen and (max-width: 600px) {
     max-height: 4rem;
   }
 
   img {
     height: 2.5rem;
-    margin-right: 0.5rem;
+    border-radius: 100%;
     @media only screen and (max-width: 600px) {
       height: 4rem;
     }
@@ -35,8 +33,7 @@ export const HeaderContainer = styled.header`
       align-items: center;
 
       width: auto;
-      height: 2rem;
-      padding: 0 0.4rem;
+      padding: 0rem 0.5rem;
 
       color: black;
       text-decoration: none;
@@ -50,6 +47,8 @@ export const HeaderContainer = styled.header`
 
       &.active {
         font-weight: bold;
+        border-radius: 10px;
+        margin: 0 4px;
         border-bottom: 2px solid blueviolet;
         background-color: ${(props) => props.theme['fill-B'] ?? ''};
       }
