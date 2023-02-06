@@ -18,7 +18,7 @@ import { ListTable } from '../../components/Tables/ListTable'
 export function Sheets() {
   return (
     <SheetContainer>
-      <form action=" ">
+      {/* <form action=" ">
         <fieldset disabled>
           <SheetHeaderContainer>
             <div>Geralt of Rivia</div>
@@ -36,7 +36,7 @@ export function Sheets() {
             </TextBoxContainer>
           </SheetBodyContainer>
         </fieldset>
-      </form>
+      </form> */}
     </SheetContainer>
   )
 }

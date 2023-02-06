@@ -40,7 +40,7 @@ interface SecondaryAttributes {
 
 interface SecondaryAttributesTableProps {
   title: string
-  fields: SecondaryAttributes | undefined
+  fields: SecondaryAttributes | {}
   minValue: number
   maxValue: number
 }
@@ -115,7 +115,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
       title: '',
       minValue: 1,
       maxValue: 100,
-      fields: { RUN: 1 },
+      fields: {},
     })
 
   const [trainingTable, setTrainingTable] =
@@ -195,7 +195,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   ) {
     const newTable = { ...primaryAttributesTable }
 
-    newTable.fields[attributeName] = newValue
+    newTable.fields[attributeName as keyof PrimaryAttributes] = newValue
 
     setPrimaryAttributesTable(newTable)
   }
