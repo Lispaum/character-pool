@@ -7,7 +7,7 @@ import {
 } from './styles'
 import { KeyValueTable } from '../../components/Tables/KeyValueTable'
 import {
-  testPrimaryAttributesTable,
+  testPrimaryAttributes,
   testSecondaryAttributesTable,
   testSkillsTable,
   testMagicTable,

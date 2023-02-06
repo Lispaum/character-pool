@@ -1,32 +1,27 @@
-export const testPrimaryAttributesTable = {
-  title: '',
-  minValue: 1,
-  maxValue: 20,
-  fields: {
-    INT: 6,
-    REF: 14,
-    DEX: 10,
-    BODY: 8,
-    SPD: 9,
-    EMP: 3,
-    CRA: 5,
-    WILL: 8,
-  },
+export const testPrimaryAttributes = {
+  INT: 6,
+  REF: 14,
+  DEX: 10,
+  BODY: 8,
+  SPD: 9,
+  EMP: 3,
+  CRA: 5,
+  WILL: 8,
 }
 
 export const testSecondaryAttributesTable = {
   title: '',
   minValue: 1,
   maxValue: 100,
-  fields: [
-    { fieldKey: 'STUN', fieldValue: 8 },
-    { fieldKey: 'RUN', fieldValue: 27 },
-    { fieldKey: 'STA', fieldValue: 40 },
-    { fieldKey: 'ENC', fieldValue: 80 },
-    { fieldKey: 'REC', fieldValue: 8 },
-    { fieldKey: 'HP', fieldValue: 55 },
-    { fieldKey: 'VIGOR', fieldValue: 7 },
-  ],
+  fields: {
+    STUN: 8,
+    RUN: 27,
+    STA: 40,
+    ENC: 80,
+    REC: 8,
+    HP: 55,
+    VIGOR: 7,
+  },
 }
 
 export const testSkillsTable = {

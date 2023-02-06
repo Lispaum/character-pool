@@ -1,12 +1,12 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import {
-  testPrimaryAttributesTable,
   testSkillsTable,
   testMagicTable,
   testBackground,
   testScrollsTable,
   testTrainableSkillsTable,
   testTrainingTable,
+  testPrimaryAttributes,
 } from '../../contexts/tests/testData'
 
 interface PrimaryAttributes {
@@ -18,13 +18,6 @@ interface PrimaryAttributes {
   EMP: number
   CRA: number
   WILL: number
-}
-
-interface PrimaryAttributesTableProps {
-  title: string
-  fields: PrimaryAttributes
-  minValue: number
-  maxValue: number
 }
 
 interface SecondaryAttributes {
@@ -67,7 +60,7 @@ interface DraggingField {
 interface SheetContextType {
   charName: string
   totalAttributesSum: number
-  primaryAttributesTable: PrimaryAttributesTableProps
+  primaryAttributes: PrimaryAttributes
   secondaryAttributesTable: SecondaryAttributesTableProps
   trainingTable: KeyValueTableProps
   skillsTable: KeyValueTableProps
@@ -77,7 +70,7 @@ interface SheetContextType {
   background: string
   draggingField: DraggingField
   updateCharName: (newName: string) => void
-  updatePrimaryAttributeField: (
+  updatePrimaryAttribute: (
     attributeName: keyof PrimaryAttributes,
     newValue: number,
   ) => void
@@ -111,8 +104,9 @@ interface SheetContextProviderProps {
 
 export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [charName, setCharName] = useState('')
-  const [primaryAttributesTable, setPrimaryAttributesTable] =
-    useState<PrimaryAttributesTableProps>(testPrimaryAttributesTable)
+  const [primaryAttributes, setPrimaryAttributes] = useState<PrimaryAttributes>(
+    testPrimaryAttributes,
+  )
   const [secondaryAttributesTable, setSecondaryAttributesTable] =
     useState<SecondaryAttributesTableProps>({
       title: '',
@@ -157,7 +151,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
 
   useEffect(() => {
     setTotalAttributesSum(
-      Object.values(primaryAttributesTable.fields).reduce(
+      Object.values(primaryAttributes).reduce(
         (acc, currentValue) => acc + currentValue,
         0,
       ),
@@ -165,8 +159,6 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
 
     setSecondaryAttributesTable((currentState) => {
       const newTable = { ...currentState }
-
-      const primaryAttributes = primaryAttributesTable.fields
 
       const modBodyWill = Math.floor(
         (primaryAttributes.BODY + primaryAttributes.WILL) / 2,
@@ -186,21 +178,21 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
       // return { ...currentState, fields: newTable.fields }
       return newTable
     })
-  }, [primaryAttributesTable, totalAttributesSum])
+  }, [primaryAttributes])
 
   function updateCharName(newName: string) {
     setCharName(newName)
   }
 
-  function updatePrimaryAttributeField(
+  function updatePrimaryAttribute(
     attributeName: keyof PrimaryAttributes,
     newValue: number,
   ) {
-    const newTable = { ...primaryAttributesTable }
+    const newTable = { ...primaryAttributes }
 
-    newTable.fields[attributeName] = newValue
+    newTable[attributeName] = newValue
 
-    setPrimaryAttributesTable(newTable)
+    setPrimaryAttributes(newTable)
   }
 
   function updateSkillField(skillName: string, newValue: number) {
@@ -319,10 +311,11 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   }
 
   async function loadSheetData() {
-    const response = await fetch('http://localhost:3434/character_sheets')
+    const response = await fetch('http://localhost:3434/character_sheets/1')
     const data = await response.json()
 
     console.log(data)
+    setPrimaryAttributes(data.primaryAttributes)
   }
 
   useEffect(() => {
@@ -335,7 +328,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         charName,
         updateCharName,
         totalAttributesSum,
-        primaryAttributesTable,
+        primaryAttributes,
         secondaryAttributesTable,
         trainingTable,
         skillsTable,
@@ -349,7 +342,8 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         bagItems,
         homeChestItems,
         newItem,
-        updatePrimaryAttributeField,
+
+        updatePrimaryAttribute,
         updateTrainingField,
         updateSkillField,
         updateTrainableSkillsField,
