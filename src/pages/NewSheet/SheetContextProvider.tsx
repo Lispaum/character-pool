@@ -77,7 +77,10 @@ interface SheetContextType {
   background: string
   draggingField: DraggingField
   updateCharName: (newName: string) => void
-  updatePrimaryAttributeField: (attributeName: string, newValue: number) => void
+  updatePrimaryAttributeField: (
+    attributeName: keyof PrimaryAttributes,
+    newValue: number,
+  ) => void
   updateTrainingField: (skillName: string, newValue: number) => void
   updateSkillField: (skillName: string, newValue: number) => void
   updateMagicField: (magicName: string) => void
@@ -190,12 +193,12 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   }
 
   function updatePrimaryAttributeField(
-    attributeName: string,
+    attributeName: keyof PrimaryAttributes,
     newValue: number,
   ) {
     const newTable = { ...primaryAttributesTable }
 
-    newTable.fields[attributeName as keyof PrimaryAttributes] = newValue
+    newTable.fields[attributeName] = newValue
 
     setPrimaryAttributesTable(newTable)
   }
