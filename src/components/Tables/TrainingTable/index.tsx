@@ -2,11 +2,6 @@ import { useContext } from 'react'
 import { SheetContext } from '../../../pages/NewSheet/SheetContextProvider'
 import { FieldContainer, TableContainer } from '../styles'
 
-interface FieldProps {
-  fieldKey: string
-  fieldValue: number
-}
-
 export function TrainingTable() {
   const {
     trainingTable,
@@ -47,6 +42,8 @@ export function TrainingTable() {
     }
   }
 
+  const skills = Object.entries(fields)
+
   return (
     <TableContainer
       onDragOver={(event) => event.preventDefault()}
@@ -54,18 +51,18 @@ export function TrainingTable() {
     >
       <h1>{title}</h1>
 
-      {fields.map((field: FieldProps) => {
+      {skills.map(([skillName, skillValue]) => {
         return (
-          <FieldContainer key={field.fieldKey}>
-            <label htmlFor={field.fieldKey}>{field.fieldKey}</label>
+          <FieldContainer key={skillName}>
+            <label htmlFor={skillName}>{skillName}</label>
             <input
               type="number"
-              id={field.fieldKey}
-              name={field.fieldKey}
+              id={skillName}
+              name={skillName}
               placeholder="-"
               min={minValue}
               max={maxValue}
-              value={field.fieldValue}
+              value={skillValue}
               onChange={handleTraining}
             />
           </FieldContainer>

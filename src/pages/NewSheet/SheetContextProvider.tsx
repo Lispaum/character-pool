@@ -9,21 +9,45 @@ import {
   testTrainingTable,
 } from '../../contexts/tests/testData'
 
-interface KeyValuePair {
-  fieldKey: string
-  fieldValue: number
+interface PrimaryAttributes {
+  INT: number
+  REF: number
+  DEX: number
+  BODY: number
+  SPD: number
+  EMP: number
+  CRA: number
+  WILL: number
+}
+
+interface PrimaryAttributesTableProps {
+  title: string
+  fields: PrimaryAttributes
+  minValue: number
+  maxValue: number
+}
+
+interface SecondaryAttributes {
+  STUN: number
+  RUN: number
+  LEAP: number
+  STA: number
+  ENC: number
+  REC: number
+  HP: number
+  VIGOR: number
+}
+
+interface SecondaryAttributesTableProps {
+  title: string
+  fields: SecondaryAttributes | undefined
+  minValue: number
+  maxValue: number
 }
 
 type KeyValueTableFields = { [key: string]: number }
 
 interface KeyValueTableProps {
-  title: string
-  fields: KeyValuePair[]
-  minValue: number
-  maxValue: number
-}
-
-interface KeyValueAttributesTableProps {
   title: string
   fields: KeyValueTableFields
   minValue: number
@@ -43,8 +67,8 @@ interface DraggingField {
 interface SheetContextType {
   charName: string
   totalAttributesSum: number
-  primaryAttributesTable: KeyValueAttributesTableProps
-  secondaryAttributesTable: KeyValueAttributesTableProps
+  primaryAttributesTable: PrimaryAttributesTableProps
+  secondaryAttributesTable: SecondaryAttributesTableProps
   trainingTable: KeyValueTableProps
   skillsTable: KeyValueTableProps
   trainableSkillsTable: ListTableProps
@@ -52,11 +76,6 @@ interface SheetContextType {
   scrollsTable: ListTableProps
   background: string
   draggingField: DraggingField
-  draggingItem: DraggingField
-  equippedItems: string[]
-  bagItems: string[]
-  homeChestItems: string[]
-  newItem: string
   updateCharName: (newName: string) => void
   updatePrimaryAttributeField: (attributeName: string, newValue: number) => void
   updateTrainingField: (skillName: string, newValue: number) => void
@@ -66,23 +85,18 @@ interface SheetContextType {
   updateScrollsField: (skillName: string) => void
   updateBackground: (newBackground: string) => void
   updateDraggingField: (skillName: string, skillSource: string) => void
+
+  draggingItem: DraggingField
+  equippedItems: string[]
+  bagItems: string[]
+  homeChestItems: string[]
+  newItem: string
   updateDraggingItem: (itemName: string, itemSource: string) => void
   updateEquippedItems: (itemName: string) => void
   updateBagItems: (itemName: string) => void
   updateHomeChestItems: (itemName: string) => void
   updateNewItem: (itemName: string) => void
 }
-
-// interface PrimaryAttributes {
-//   INT: number
-//   REF: number
-//   DEX: number
-//   BODY: number
-//   SPD: number
-//   EMP: number
-//   CRA: number
-//   WILL: number
-// }
 
 export const SheetContext = createContext<SheetContextType>(
   {} as SheetContextType,
@@ -95,14 +109,15 @@ interface SheetContextProviderProps {
 export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [charName, setCharName] = useState('')
   const [primaryAttributesTable, setPrimaryAttributesTable] =
-    useState<KeyValueAttributesTableProps>(testPrimaryAttributesTable)
+    useState<PrimaryAttributesTableProps>(testPrimaryAttributesTable)
   const [secondaryAttributesTable, setSecondaryAttributesTable] =
-    useState<KeyValueAttributesTableProps>({
+    useState<SecondaryAttributesTableProps>({
       title: '',
       minValue: 1,
       maxValue: 100,
-      fields: {},
+      fields: { RUN: 1 },
     })
+
   const [trainingTable, setTrainingTable] =
     useState<KeyValueTableProps>(testTrainingTable)
   const [skillsTable, setSkillsTable] =
@@ -165,7 +180,8 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
         VIGOR: 7,
       }
 
-      return { ...currentState, fields: newTable.fields }
+      // return { ...currentState, fields: newTable.fields }
+      return newTable
     })
   }, [primaryAttributesTable, totalAttributesSum])
 
@@ -184,56 +200,32 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     setPrimaryAttributesTable(newTable)
   }
 
-  function updateTrainingField(skillName: string, newValue: number) {
-    const newTable = { ...trainingTable }
-
-    let isNewField: boolean = true
-    let isFinishedTraining: boolean = false
-
-    newTable.fields.forEach((field) => {
-      if (field.fieldKey === skillName) {
-        field.fieldValue = newValue
-        isNewField = false
-
-        if (newValue > 3) {
-          isFinishedTraining = true
-        }
-      }
-    })
-
-    if (isNewField) {
-      newTable.fields.push({ fieldKey: skillName, fieldValue: newValue })
-    } else if (isFinishedTraining) {
-      newTable.fields = newTable.fields.filter(
-        (field) => field.fieldKey !== skillName,
-      )
-    }
-
-    setTrainingTable(newTable)
-  }
-
   function updateSkillField(skillName: string, newValue: number) {
     const newTable = { ...skillsTable }
 
-    let isNewField: boolean = true
     const isForgotSkill: boolean = newValue === 0
 
-    newTable.fields.forEach((field) => {
-      if (field.fieldKey === skillName) {
-        field.fieldValue = newValue
-        isNewField = false
-      }
-    })
+    newTable.fields[skillName] = newValue
 
-    if (isNewField) {
-      newTable.fields.push({ fieldKey: skillName, fieldValue: 1 })
-    } else if (isForgotSkill) {
-      newTable.fields = newTable.fields.filter(
-        (field) => field.fieldKey !== skillName,
-      )
+    if (isForgotSkill) {
+      delete newTable.fields[skillName]
     }
 
     setSkillsTable(newTable)
+  }
+
+  function updateTrainingField(skillName: string, newValue: number) {
+    const newTable = { ...trainingTable }
+
+    const isFinishedTraining: boolean = newValue > 3
+
+    newTable.fields[skillName] = newValue
+
+    if (isFinishedTraining) {
+      delete newTable.fields[skillName]
+    }
+
+    setTrainingTable(newTable)
   }
 
   function updateTrainableSkillsField(skillName: string) {
