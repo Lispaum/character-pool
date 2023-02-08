@@ -6,7 +6,7 @@ export function TrainingTable() {
   const {
     trainingTable,
     updateTrainingField,
-    updateSkillField,
+    updateSkill,
     updateMagicField,
     updateTrainableSkillsField,
     updateScrollsField,
@@ -25,7 +25,7 @@ export function TrainingTable() {
       if (fieldName.includes('Sign')) {
         updateMagicField(fieldName)
       } else {
-        updateSkillField(fieldName, 1)
+        updateSkill(fieldName, 1)
       }
     }
   }
