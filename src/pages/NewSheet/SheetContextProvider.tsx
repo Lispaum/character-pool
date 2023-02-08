@@ -63,7 +63,7 @@ interface SheetContextType {
   primaryAttributes: PrimaryAttributes
   secondaryAttributesTable: SecondaryAttributesTableProps
   trainingTable: KeyValueTableProps
-  skillsTable: KeyValueTableProps
+  skillsTable: KeyValueTableFields
   trainableSkillsTable: ListTableProps
   magicTable: ListTableProps
   scrollsTable: ListTableProps
@@ -75,7 +75,7 @@ interface SheetContextType {
     newValue: number,
   ) => void
   updateTrainingField: (skillName: string, newValue: number) => void
-  updateSkillField: (skillName: string, newValue: number) => void
+  updateSkill: (skillName: string, newValue: number) => void
   updateMagicField: (magicName: string) => void
   updateTrainableSkillsField: (skillName: string) => void
   updateScrollsField: (skillName: string) => void
@@ -118,7 +118,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   const [trainingTable, setTrainingTable] =
     useState<KeyValueTableProps>(testTrainingTable)
   const [skillsTable, setSkillsTable] =
-    useState<KeyValueTableProps>(testSkillsTable)
+    useState<KeyValueTableFields>(testSkillsTable)
   const [trainableSkillsTable, setTrainableSkillsTable] = useState(
     testTrainableSkillsTable,
   )
@@ -195,15 +195,15 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
     setPrimaryAttributes(newTable)
   }
 
-  function updateSkillField(skillName: string, newValue: number) {
+  function updateSkill(skillName: string, newValue: number) {
     const newTable = { ...skillsTable }
 
     const isForgotSkill: boolean = newValue === 0
 
-    newTable.fields[skillName] = newValue
+    newTable[skillName] = newValue
 
     if (isForgotSkill) {
-      delete newTable.fields[skillName]
+      delete newTable[skillName]
     }
 
     setSkillsTable(newTable)
@@ -311,11 +311,12 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
   }
 
   async function loadSheetData() {
-    const response = await fetch('http://localhost:3434/character_sheets/1')
+    const response = await fetch('http://localhost:3434/character_sheets/2')
     const data = await response.json()
 
     console.log(data)
     setPrimaryAttributes(data.primaryAttributes)
+    setSkillsTable(data.skills)
   }
 
   useEffect(() => {
@@ -345,7 +346,7 @@ export function SheetContextProvider({ children }: SheetContextProviderProps) {
 
         updatePrimaryAttribute,
         updateTrainingField,
-        updateSkillField,
+        updateSkill,
         updateTrainableSkillsField,
         updateMagicField,
         updateScrollsField,

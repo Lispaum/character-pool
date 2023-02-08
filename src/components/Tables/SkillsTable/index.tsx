@@ -7,31 +7,30 @@ import { FieldContainer, TableContainer } from '../styles'
 //   fields: FieldProps[]
 //   minValue: number
 //   maxValue: number
-//   updateSkillField: (attributeName: string, newValue: number) => void
+//   updateSkill: (attributeName: string, newValue: number) => void
 //   updateTrainableSkillsField: (skillName: string) => void
 // }
 
 export function SkillsTable() {
-  const { skillsTable, updateSkillField, updateTrainableSkillsField } =
+  const { skillsTable, updateSkill, updateTrainableSkillsField } =
     useContext(SheetContext)
 
-  const { title, fields, minValue, maxValue } = skillsTable
+  const minValue = 0
+  const maxValue = 100
 
   function handleUpdateField(event: any) {
-    updateSkillField(event.target.name, Number(event.target.value))
+    updateSkill(event.target.name, Number(event.target.value))
 
     if (event.target.value < minValue + 1) {
       updateTrainableSkillsField(event.target.name)
     }
   }
 
-  const skills = Object.entries(fields)
-
   return (
     <TableContainer>
-      <h1>{title}</h1>
+      <h1>Skills</h1>
 
-      {skills.map(([skillName, skillValue]) => {
+      {Object.entries(skillsTable).map(([skillName, skillValue]) => {
         return (
           <FieldContainer key={skillName}>
             <label htmlFor={skillName}>{skillName}</label>

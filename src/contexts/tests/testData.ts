@@ -25,27 +25,22 @@ export const testSecondaryAttributesTable = {
 }
 
 export const testSkillsTable = {
-  title: 'Skills',
-  minValue: 0,
-  maxValue: 100,
-  fields: {
-    Awareness: 9,
-    Riding: 4,
-    'Spell Casting': 8,
-    Alchemy: 5,
-    Brawling: 6,
-    'Dodge/Escape': 10,
-    'Wildernes Survival': 9,
-    Swordsmanship: 11,
-    Athletics: 10,
-    'Small Blades': 9,
-    Melee: 7,
-    Intimidation: 9,
-    Physique: 6,
-    'Resist Coercion': 8,
-    'Resist Magic': 6,
-    'Resist Endurance': 10,
-  },
+  Awareness: 9,
+  Riding: 4,
+  'Spell Casting': 8,
+  Alchemy: 5,
+  Brawling: 6,
+  'Dodge/Escape': 10,
+  'Wildernes Survival': 9,
+  Swordsmanship: 11,
+  Athletics: 10,
+  'Small Blades': 9,
+  Melee: 7,
+  Intimidation: 9,
+  Physique: 6,
+  'Resist Coercion': 8,
+  'Resist Magic': 6,
+  'Resist Endurance': 10,
 }
 
 export const testTrainableSkillsTable = {

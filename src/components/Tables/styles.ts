@@ -12,9 +12,17 @@ export const TableContainer = styled.div`
     background-color: ${(props) => props.theme['fill-B'] ?? ''};
     padding: 0 0.5rem;
   }
-  *:first-child,
+
+  *:first-child {
+    border-radius: inherit;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+  }
+
   *:last-child {
     border-radius: inherit;
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
   }
 `
 
