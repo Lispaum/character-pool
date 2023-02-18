@@ -1,13 +1,17 @@
+import { useState } from 'react'
 import { PageContainer } from '../styles'
 import { GenerateLifePath } from './GenerateLifePath'
 
 export function GameTools() {
-  const lifePath = GenerateLifePath()
+  const [lifePath, setLifePath] = useState(GenerateLifePath())
 
+  function handleRerollLifePath(event: any) {
+    setLifePath(GenerateLifePath())
+  }
   return (
     <PageContainer>
       <h1>Your Life Path</h1>
-      <h2>Again</h2>
+      <h2 onClick={handleRerollLifePath}>Again</h2>
 
       {Object.entries(lifePath).map(([key, value]) => {
         return (
