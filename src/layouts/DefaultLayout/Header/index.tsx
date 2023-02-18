@@ -22,6 +22,7 @@ export function Header() {
         <NavLink to="/sheets">Sheets</NavLink>
         <NavLink to="/new-sheet">New Sheet</NavLink>
         <NavLink to="/guide">Guide</NavLink>
+        <NavLink to="/game-tools">GameTools</NavLink>
       </nav>
       <div className="headerRight">
         <div className="buttons">

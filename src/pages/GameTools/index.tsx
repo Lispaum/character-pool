@@ -1,0 +1,22 @@
+import { PageContainer } from '../styles'
+import { GenerateLifePath } from './GenerateLifePath'
+
+export function GameTools() {
+  const lifePath = GenerateLifePath()
+
+  return (
+    <PageContainer>
+      <h1>Your Life Path</h1>
+      <h2>Again</h2>
+
+      {Object.entries(lifePath).map(([key, value]) => {
+        return (
+          <div key={key}>
+            <h4>{key}</h4>
+            <p>{value}</p>
+          </div>
+        )
+      })}
+    </PageContainer>
+  )
+}
