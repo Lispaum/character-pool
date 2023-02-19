@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { PageContainer } from '../styles'
+import { roll, testRNGRandomness } from './gameTools'
 import { GenerateLifePath } from './GenerateLifePath'
 
 export function GameTools() {
@@ -21,6 +22,11 @@ export function GameTools() {
           </div>
         )
       })}
+
+      <h2>teste</h2>
+      {/* {testRNGRandomness().map((result, index) => {
+        return <p key={index}>{result}</p>
+      })} */}
     </PageContainer>
   )
 }
