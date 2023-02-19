@@ -3,12 +3,19 @@ import { PageContainer } from '../styles'
 import { roll, testRNGRandomness } from './gameTools'
 import { GenerateLifePath } from './GenerateLifePath'
 
+type Race = 'Witcher' | 'Human' | 'Non-Human'
+type pickedOptions = { [key: string]: string }
+
 export function GameTools() {
-  const [lifePath, setLifePath] = useState(GenerateLifePath())
+  const [characterRace, setCharacterRace] = useState<Race>('Witcher')
+  const [lifePath, setLifePath] = useState<pickedOptions>(
+    GenerateLifePath('Witcher'),
+  )
 
   function handleRerollLifePath(event: any) {
-    setLifePath(GenerateLifePath())
+    setLifePath(GenerateLifePath(characterRace))
   }
+
   return (
     <PageContainer>
       <h1>Your Life Path</h1>

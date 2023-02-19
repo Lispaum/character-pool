@@ -25,6 +25,10 @@ export function roll(command: string) {
   return result
 }
 
+export function d2() {
+  return RNG(2)
+}
+
 export function d10() {
   return RNG(10)
 }
