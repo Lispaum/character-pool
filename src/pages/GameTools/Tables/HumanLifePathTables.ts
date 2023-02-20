@@ -18,7 +18,7 @@ export const regionOptions: option[] = [
 export const nilfgaardianOptions: option[] = [
   {
     rangeRoof: 3,
-    value: `The Heart of Nilfgaard`,
+    value: `The Heart of Nilfgaard (+1 Deceit)`,
   },
   {
     rangeRoof: 10,

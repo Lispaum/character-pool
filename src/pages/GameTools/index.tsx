@@ -7,9 +7,9 @@ type Race = 'Witcher' | 'Human' | 'Non-Human'
 type pickedOptions = { [key: string]: string }
 
 export function GameTools() {
-  const [characterRace, setCharacterRace] = useState<Race>('Witcher')
+  const [characterRace, setCharacterRace] = useState<Race>('Human')
   const [lifePath, setLifePath] = useState<pickedOptions>(
-    GenerateLifePath('Witcher'),
+    GenerateLifePath('Human'),
   )
 
   function handleRerollLifePath(event: any) {
